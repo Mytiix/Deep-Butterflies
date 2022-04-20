@@ -1,0 +1,353 @@
+[2022-02-08 14:25:14,705][INFO] [GET] [currentuser] CURRENT USER - 535338739 : lmarganne | 200 OK
+[2022-02-08 14:25:14,770][INFO] [GET] [project] 6575282 : LANDMARKS-UPMC-DROSO | 200 OK
+[2022-02-08 14:25:14,947][INFO] [GET] [software] 127520103 : LandmarkDetect-ML-MSET-Train-A | 200 OK
+[2022-02-08 14:25:15,005][INFO] [GET] [softwareparameter collection] 22 objects | 200 OK
+[2022-02-08 14:25:15,420][INFO] [POST] [job] 543003243 : None | 200 OK
+[2022-02-08 14:25:15,581][INFO] [GET] [user] 543003249 : JOB[lmarganne ], 2022-02-08 14:25:14:487 | 200 OK
+[2022-02-08 14:25:15,779][INFO] [GET] [currentuser] CURRENT USER - 543003249 : JOB[lmarganne ], 2022-02-08 14:25:14:487 | 200 OK
+[2022-02-08 14:25:15,779][INFO] Job (id:543003243) status update: "None" (status: RUNNING, progress: 0%)
+[2022-02-08 14:25:15,971][INFO] [PUT] [job] 543003243 : None | 200 OK
+[2022-02-08 14:25:16,110][INFO] [POST] [jobparameter] 543003257 : cytomine_id_terms | 200 OK
+[2022-02-08 14:25:16,188][INFO] [POST] [jobparameter] 543003263 : cytomine_training_images | 200 OK
+[2022-02-08 14:25:16,274][INFO] [POST] [jobparameter] 543003269 : model_njobs | 200 OK
+[2022-02-08 14:25:16,360][INFO] [POST] [jobparameter] 543003275 : model_RMAX | 200 OK
+[2022-02-08 14:25:16,459][INFO] [POST] [jobparameter] 543003281 : model_R | 200 OK
+[2022-02-08 14:25:16,590][INFO] [POST] [jobparameter] 543003287 : model_P | 200 OK
+[2022-02-08 14:25:16,689][INFO] [POST] [jobparameter] 543003293 : model_npred | 200 OK
+[2022-02-08 14:25:16,798][INFO] [POST] [jobparameter] 543003299 : model_ntrees | 200 OK
+[2022-02-08 14:25:16,882][INFO] [POST] [jobparameter] 543003305 : model_ntimes | 200 OK
+[2022-02-08 14:25:16,995][INFO] [POST] [jobparameter] 543003311 : model_angle | 200 OK
+[2022-02-08 14:25:17,090][INFO] [POST] [jobparameter] 543003317 : model_depth | 200 OK
+[2022-02-08 14:25:17,178][INFO] [POST] [jobparameter] 543003323 : model_step | 200 OK
+[2022-02-08 14:25:17,303][INFO] [POST] [jobparameter] 543003329 : model_wsize | 200 OK
+[2022-02-08 14:25:17,387][INFO] [POST] [jobparameter] 543003335 : model_feature_type | 200 OK
+[2022-02-08 14:25:17,475][INFO] [POST] [jobparameter] 543003341 : model_feature_haar_n | 200 OK
+[2022-02-08 14:25:17,566][INFO] [POST] [jobparameter] 543003347 : model_feature_gaussian_n | 200 OK
+[2022-02-08 14:25:17,687][INFO] [POST] [jobparameter] 543003353 : model_feature_gaussian_std | 200 OK
+[2022-02-08 14:25:17,688][INFO] Job (id:543003243) status update: "None" (status: RUNNING, progress: 0%)
+[2022-02-08 14:25:17,831][INFO] [PUT] [job] 543003243 : None | 200 OK
+[2022-02-08 14:25:17,832][INFO] Job (id:543003243) status update: "Downloading images (to /root/543003243/in/)..." (status: RUNNING, progress: 0%)
+[2022-02-08 14:25:17,941][INFO] [PUT] [job] 543003243 : None | 200 OK
+Namespace(cytomine_host='https://research.cytomine.be', cytomine_id_project=6575282, cytomine_id_software=127520103, cytomine_id_terms='6579647', cytomine_private_key='49725276-a001-4d25-9800-76409c8aad9a', cytomine_public_key='50af36d2-3ccc-4928-a21d-aab32e437fbf', cytomine_training_images='6603655', model_P=3, model_R=6, model_RMAX=100, model_angle=10, model_depth=5, model_feature_gaussian_n=1600, model_feature_gaussian_std=20, model_feature_haar_n=1600, model_feature_type='raw', model_njobs=1, model_npred=50000, model_ntimes=1, model_ntrees=50, model_step=1, model_wsize=8)
+[2022-02-08 14:25:18,319][INFO] [GET] [imageinstance collection] 140 objects | 200 OK
+[2022-02-08 14:25:20,847][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/162508789/thumb.jpg
+[2022-02-08 14:25:20,989][INFO] [GET] [annotation collection] 0 objects | 200 OK
+[2022-02-08 14:25:23,884][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/162508594/thumb.jpg
+[2022-02-08 14:25:23,949][INFO] [GET] [annotation collection] 0 objects | 200 OK
+[2022-02-08 14:25:24,796][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6614283/thumb.jpg
+[2022-02-08 14:25:24,889][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:25,483][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6614214/thumb.jpg
+[2022-02-08 14:25:25,560][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:26,670][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6614203/thumb.jpg
+[2022-02-08 14:25:26,750][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:27,673][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6614139/thumb.jpg
+[2022-02-08 14:25:27,744][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:28,438][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6614027/thumb.jpg
+[2022-02-08 14:25:28,517][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:29,418][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613943/thumb.jpg
+[2022-02-08 14:25:29,500][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:30,478][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613874/thumb.jpg
+[2022-02-08 14:25:30,550][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:31,833][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613834/thumb.jpg
+[2022-02-08 14:25:31,908][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:32,871][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613735/thumb.jpg
+[2022-02-08 14:25:32,944][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:33,804][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613655/thumb.jpg
+[2022-02-08 14:25:33,974][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:34,894][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613639/thumb.jpg
+[2022-02-08 14:25:35,016][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:35,844][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613495/thumb.jpg
+[2022-02-08 14:25:35,923][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:37,038][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613406/thumb.jpg
+[2022-02-08 14:25:37,114][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:37,916][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613400/thumb.jpg
+[2022-02-08 14:25:37,994][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:38,883][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613293/thumb.jpg
+[2022-02-08 14:25:38,992][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:39,982][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613276/thumb.jpg
+[2022-02-08 14:25:40,058][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:41,171][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613117/thumb.jpg
+[2022-02-08 14:25:41,242][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:42,392][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6613021/thumb.jpg
+[2022-02-08 14:25:42,472][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:43,911][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612956/thumb.jpg
+[2022-02-08 14:25:43,992][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:44,913][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612850/thumb.jpg
+[2022-02-08 14:25:44,990][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:45,851][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612775/thumb.jpg
+[2022-02-08 14:25:45,930][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:46,889][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612674/thumb.jpg
+[2022-02-08 14:25:46,964][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:47,764][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612589/thumb.jpg
+[2022-02-08 14:25:47,836][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:48,600][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612524/thumb.jpg
+[2022-02-08 14:25:48,671][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:49,428][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612423/thumb.jpg
+[2022-02-08 14:25:49,506][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:50,269][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612384/thumb.jpg
+[2022-02-08 14:25:50,345][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:51,045][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612363/thumb.jpg
+[2022-02-08 14:25:51,120][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:52,164][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612202/thumb.jpg
+[2022-02-08 14:25:52,240][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:53,065][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612132/thumb.jpg
+[2022-02-08 14:25:53,149][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:53,862][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6612032/thumb.jpg
+[2022-02-08 14:25:53,933][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:55,234][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611952/thumb.jpg
+[2022-02-08 14:25:55,313][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:55,961][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611838/thumb.jpg
+[2022-02-08 14:25:56,042][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:57,348][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611797/thumb.jpg
+[2022-02-08 14:25:57,421][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:58,267][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611707/thumb.jpg
+[2022-02-08 14:25:58,341][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:25:58,991][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611654/thumb.jpg
+[2022-02-08 14:25:59,069][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:00,042][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611640/thumb.jpg
+[2022-02-08 14:26:00,129][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:00,824][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611480/thumb.jpg
+[2022-02-08 14:26:00,899][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:01,463][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611411/thumb.jpg
+[2022-02-08 14:26:01,534][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:02,169][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611315/thumb.jpg
+[2022-02-08 14:26:02,242][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:03,021][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611225/thumb.jpg
+[2022-02-08 14:26:03,096][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:03,757][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611139/thumb.jpg
+[2022-02-08 14:26:03,841][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:04,674][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611048/thumb.jpg
+[2022-02-08 14:26:04,754][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:05,269][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6611042/thumb.jpg
+[2022-02-08 14:26:05,345][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:06,236][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610967/thumb.jpg
+[2022-02-08 14:26:06,313][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:07,130][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610850/thumb.jpg
+[2022-02-08 14:26:07,201][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:08,347][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610748/thumb.jpg
+[2022-02-08 14:26:08,419][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:10,406][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610679/thumb.jpg
+[2022-02-08 14:26:10,485][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:11,352][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610663/thumb.jpg
+[2022-02-08 14:26:11,428][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:12,358][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610530/thumb.jpg
+[2022-02-08 14:26:12,431][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:13,287][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610406/thumb.jpg
+[2022-02-08 14:26:13,353][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:14,362][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610347/thumb.jpg
+[2022-02-08 14:26:14,432][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:15,309][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610246/thumb.jpg
+[2022-02-08 14:26:15,384][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:16,258][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610240/thumb.jpg
+[2022-02-08 14:26:16,325][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:17,305][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6610092/thumb.jpg
+[2022-02-08 14:26:17,375][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:18,217][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609991/thumb.jpg
+[2022-02-08 14:26:18,290][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:18,927][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609980/thumb.jpg
+[2022-02-08 14:26:18,999][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:19,799][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609974/thumb.jpg
+[2022-02-08 14:26:19,869][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:20,701][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609968/thumb.jpg
+[2022-02-08 14:26:20,776][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:21,580][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609769/thumb.jpg
+[2022-02-08 14:26:21,882][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:23,110][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609639/thumb.jpg
+[2022-02-08 14:26:23,176][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:24,348][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609581/thumb.jpg
+[2022-02-08 14:26:24,426][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:25,130][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609563/thumb.jpg
+[2022-02-08 14:26:25,206][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:26,247][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609437/thumb.jpg
+[2022-02-08 14:26:26,318][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:27,410][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609431/thumb.jpg
+[2022-02-08 14:26:27,480][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:28,381][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609289/thumb.jpg
+[2022-02-08 14:26:28,456][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:29,278][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609179/thumb.jpg
+[2022-02-08 14:26:29,350][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:30,359][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609068/thumb.jpg
+[2022-02-08 14:26:30,440][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:31,018][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6609033/thumb.jpg
+[2022-02-08 14:26:31,100][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:31,960][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608913/thumb.jpg
+[2022-02-08 14:26:32,057][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:33,031][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608849/thumb.jpg
+[2022-02-08 14:26:33,112][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:33,965][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608777/thumb.jpg
+[2022-02-08 14:26:34,044][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:34,931][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608694/thumb.jpg
+[2022-02-08 14:26:35,011][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:35,980][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608688/thumb.jpg
+[2022-02-08 14:26:36,058][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:37,139][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608522/thumb.jpg
+[2022-02-08 14:26:37,211][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:37,929][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608426/thumb.jpg
+[2022-02-08 14:26:38,005][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:39,323][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608415/thumb.jpg
+[2022-02-08 14:26:39,397][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:40,252][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608273/thumb.jpg
+[2022-02-08 14:26:40,332][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:41,351][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608261/thumb.jpg
+[2022-02-08 14:26:41,429][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:42,231][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608175/thumb.jpg
+[2022-02-08 14:26:42,309][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:43,219][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6608045/thumb.jpg
+[2022-02-08 14:26:43,297][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:44,119][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607949/thumb.jpg
+[2022-02-08 14:26:44,198][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:45,256][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607886/thumb.jpg
+[2022-02-08 14:26:45,415][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:46,331][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607779/thumb.jpg
+[2022-02-08 14:26:46,416][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:47,322][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607773/thumb.jpg
+[2022-02-08 14:26:47,401][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:48,142][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607634/thumb.jpg
+[2022-02-08 14:26:48,221][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:48,995][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607589/thumb.jpg
+[2022-02-08 14:26:49,080][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:50,518][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607469/thumb.jpg
+[2022-02-08 14:26:50,597][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:51,562][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607385/thumb.jpg
+[2022-02-08 14:26:51,638][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:52,966][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607373/thumb.jpg
+[2022-02-08 14:26:53,051][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:54,181][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607213/thumb.jpg
+[2022-02-08 14:26:54,257][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:55,129][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607207/thumb.jpg
+[2022-02-08 14:26:55,205][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:55,983][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6607056/thumb.jpg
+[2022-02-08 14:26:56,065][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:56,815][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606972/thumb.jpg
+[2022-02-08 14:26:56,888][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:57,783][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606931/thumb.jpg
+[2022-02-08 14:26:57,861][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:26:59,000][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606816/thumb.jpg
+[2022-02-08 14:26:59,077][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:00,319][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606736/thumb.jpg
+[2022-02-08 14:27:00,393][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:01,271][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606662/thumb.jpg
+[2022-02-08 14:27:01,345][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:02,676][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606650/thumb.jpg
+[2022-02-08 14:27:02,751][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:03,352][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606507/thumb.jpg
+[2022-02-08 14:27:03,430][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:04,131][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606461/thumb.jpg
+[2022-02-08 14:27:04,205][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:05,202][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606347/thumb.jpg
+[2022-02-08 14:27:05,276][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:06,575][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606327/thumb.jpg
+[2022-02-08 14:27:06,649][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:07,441][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606198/thumb.jpg
+[2022-02-08 14:27:07,514][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:08,420][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606139/thumb.jpg
+[2022-02-08 14:27:08,493][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:09,260][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6606022/thumb.jpg
+[2022-02-08 14:27:09,338][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:10,274][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605937/thumb.jpg
+[2022-02-08 14:27:10,344][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:11,235][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605846/thumb.jpg
+[2022-02-08 14:27:11,316][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:12,115][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605800/thumb.jpg
+[2022-02-08 14:27:12,187][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:12,891][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605692/thumb.jpg
+[2022-02-08 14:27:12,962][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:13,931][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605673/thumb.jpg
+[2022-02-08 14:27:14,000][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:14,886][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605591/thumb.jpg
+[2022-02-08 14:27:14,966][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:16,077][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605462/thumb.jpg
+[2022-02-08 14:27:16,150][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:17,183][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605377/thumb.jpg
+[2022-02-08 14:27:17,255][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:18,252][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605275/thumb.jpg
+[2022-02-08 14:27:18,323][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:19,220][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605225/thumb.jpg
+[2022-02-08 14:27:19,297][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:20,331][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605219/thumb.jpg
+[2022-02-08 14:27:20,406][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:21,018][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6605207/thumb.jpg
+[2022-02-08 14:27:21,096][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:22,071][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604977/thumb.jpg
+[2022-02-08 14:27:22,148][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:22,786][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604966/thumb.jpg
+[2022-02-08 14:27:22,860][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:23,708][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604827/thumb.jpg
+[2022-02-08 14:27:23,778][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:24,883][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604742/thumb.jpg
+[2022-02-08 14:27:24,953][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:25,810][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604662/thumb.jpg
+[2022-02-08 14:27:25,881][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:26,804][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604605/thumb.jpg
+[2022-02-08 14:27:26,877][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:27,471][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604486/thumb.jpg
+[2022-02-08 14:27:27,548][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:28,131][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604470/thumb.jpg
+[2022-02-08 14:27:28,202][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:28,776][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604395/thumb.jpg
+[2022-02-08 14:27:28,846][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:29,741][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604270/thumb.jpg
+[2022-02-08 14:27:29,813][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:30,503][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604181/thumb.jpg
+[2022-02-08 14:27:30,574][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:31,547][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604141/thumb.jpg
+[2022-02-08 14:27:31,622][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:32,641][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6604130/thumb.jpg
+[2022-02-08 14:27:32,731][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:33,854][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6603956/thumb.jpg
+[2022-02-08 14:27:33,944][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:34,827][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6603950/thumb.jpg
+[2022-02-08 14:27:34,898][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:35,717][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6603783/thumb.jpg
+[2022-02-08 14:27:35,802][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:36,798][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6603661/thumb.jpg
+[2022-02-08 14:27:36,871][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:37,747][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6603655/thumb.jpg
+[2022-02-08 14:27:37,821][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:38,601][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6603649/thumb.jpg
+[2022-02-08 14:27:38,675][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:39,460][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6603463/thumb.jpg
+[2022-02-08 14:27:39,544][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:40,385][INFO] File downloaded successfully from https://research.cytomine.be/api/imageinstance/6603457/thumb.jpg
+[2022-02-08 14:27:40,460][INFO] [GET] [annotation collection] 15 objects | 200 OK
+[2022-02-08 14:27:40,480][INFO] Job (id:543003243) status update: "Model building for terms... (1/1)." (status: RUNNING, progress: 10%)
+[2022-02-08 14:27:40,660][INFO] [PUT] [job] 543003243 : None | 200 OK
+/app/run.py:136: RuntimeWarning: Degrees of freedom <= 0 for slice
+  cm = np.cov(P)
+/usr/local/lib/python3.6/site-packages/numpy/lib/function_base.py:2451: RuntimeWarning: divide by zero encountered in true_divide
+  c *= np.true_divide(1, fact)
+/usr/local/lib/python3.6/site-packages/numpy/lib/function_base.py:2451: RuntimeWarning: invalid value encountered in multiply
+  c *= np.true_divide(1, fact)
+[2022-02-08 14:27:40,999][INFO] Job (id:543003243) status update: "only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices" (status: FAILED, progress: 10%)
+[2022-02-08 14:27:41,121][INFO] [PUT] [job] 543003243 : None | 200 OK
+IMAGE 6603655
+multiprocessing.pool.RemoteTraceback:
+"""
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/usr/local/lib/python3.6/multiprocessing/pool.py", line 44, in mapstar
+    return list(map(*args))
+  File "/usr/local/lib/python3.6/site-packages/ldmtools/ldmtools.py", line 719, in mp_helper_rot
+    return dataset_image_rot(*job_args)
+  File "/usr/local/lib/python3.6/site-packages/ldmtools/ldmtools.py", line 716, in dataset_image_rot
+    return build_dataset_image(im,window_size,x_r,y_r,feature_type,feature_parameters,depths),REP,IMGS
+  File "/usr/local/lib/python3.6/site-packages/ldmtools/ldmtools.py", line 474, in build_dataset_image
+    cub[z,:,:] = im[Y[z][j]:Y[z][j]+dwp,X[z][j]:X[z][j]+dwp] - IM[y, x]
+IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/app/run.py", line 232, in <module>
+    main()
+  File "/app/run.py", line 159, in main
+    T = build_datasets_rot_mp(in_path, tr_im, xc, yc, conn.parameters.model_R, conn.parameters.model_RMAX, conn.parameters.model_P, conn.parameters.model_step, rangrange, conn.parameters.model_wsize, conn.parameters.model_feature_type, feature_parameters, depths, nimages, 'jpg', conn.parameters.model_njobs)
+  File "/usr/local/lib/python3.6/site-packages/ldmtools/ldmtools.py", line 725, in build_datasets_rot_mp
+    T = p.map(mp_helper_rot,job_args)
+  File "/usr/local/lib/python3.6/multiprocessing/pool.py", line 266, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+  File "/usr/local/lib/python3.6/multiprocessing/pool.py", line 644, in get
+    raise self._value
+IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices
