@@ -129,5 +129,7 @@ dmypy.json
 .pyre/
 
 # Custom
-.hdf5
-.png
+*.hdf5
+*.tif
+*.png
+*.v2
