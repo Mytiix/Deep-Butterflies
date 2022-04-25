@@ -1,3 +1,7 @@
+amathonte_menelaus_godartii rgb v / early stopping:
+Mean RMSE => 17.8
+Mean Hit Rate => 81.4
+
 amathonte_menelaus_godartii rgb v / no early stopping:
 Mean RMSE => 108.47016713899166
 Mean Hit Rate => 33.482142857142854
@@ -5,6 +9,8 @@ Mean Hit Rate => 33.482142857142854
 amathonte_menelaus_godartii rgb v / no callbacks:
 Mean RMSE => 20.417147420627842
 Mean Hit Rate => 85.26785714285714
+
+--------------------------------------------------------
 
 all rgb v / after ~100 epochs / sigma 4
 Mean RMSE => 17.966702315468847
@@ -25,3 +31,34 @@ Mean Hit Rate => 87.098804279421
 all rgb v / after ~800 epochs / sigma 4
 Mean RMSE => 15.084042166773186
 Mean Hit Rate => 88.79798615481434
+
+--------------------------------------------------------
+
+all rgb d / after ~75 epochs / sigma 4
+Mean RMSE => 16.58394283373887
+Mean Hit Rate => 87.00524558893659
+
+all rgb d / after ~400 epochs / sigma 4
+Mean RMSE => 13.842084973967667
+Mean Hit Rate => 92.10777300906055
+
+--------------------------------------------------------
+
+all_slm rgb d / after ~150 epochs / sigma 4
+Mean RMSE => 16.158859607091685
+Mean Hit Rate => 85.75437438098382
+
+all_slm rgb d / after ~350 epochs / sigma 4
+Mean RMSE => 15.287121045645984
+Mean Hit Rate => 86.2991086167052
+
+
+
+
+
+
+
+
+
+
+

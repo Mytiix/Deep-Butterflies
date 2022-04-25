@@ -21,10 +21,11 @@ def dump_images(images_list, repository):
 
 	terms_collection = TermCollection().fetch_with_filter("project", params.project_id)
 	terms_names = {term.id : term.name for term in terms_collection}
-	check_terms = [str(i) + '-v-lm' for i in range(1,15)] + [str(i) + '-d-lm' for i in range(1,19)]
+	#check_terms = [str(i) + '-v-lm' for i in range(1,15)] + [str(i) + '-d-lm' for i in range(1,19)]
+	check_terms = [str(i) + '-v-slm' for i in range(15,30)] + [str(i) + '-d-slm' for i in range(19,45)]
 
 	for image in images_list:
-		image.download(dest_pattern=repository+'/images/%d.tif' % image.id)
+		#image.download(dest_pattern=repository+'/images/%d.tif' % image.id)
 
 		annotations = AnnotationCollection()
 		annotations.project = params.project_id
@@ -67,7 +68,7 @@ if __name__ == '__main__':
 
 	with Cytomine(host=params.host, public_key=params.public_key, private_key=params.private_key) as cytomine:
 
-		repository = 'D:\\Dataset_TFE\\images_v2/'
+		repository = 'D:/Dataset_TFE/images_v2/'
 	
 		# Get every images to dump in the repository
 		with open('sp.pkl', 'rb') as file:
@@ -76,10 +77,10 @@ if __name__ == '__main__':
 		images_list_d = list()
 		images_list_v = list()
 		for k, v in sp.items():
-			images_list_d = v[0]
-			images_list_v = v[1]
+			images_list_d += v[0]
+			images_list_v += v[1]
 
-			specie = k
+		specie = 'all_slm'
 			
-			dump_images(images_list_d, repository+specie+'/d')
-			dump_images(images_list_v, repository+specie+'/v')
+		dump_images(images_list_d, repository+specie+'/d')
+		dump_images(images_list_v, repository+specie+'/v')

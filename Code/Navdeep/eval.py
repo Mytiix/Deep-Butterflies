@@ -20,7 +20,7 @@ from sklearn.metrics import mean_squared_error
 from tensorflow.keras.models import Model, load_model
 
 # Params
-species = 'all'
+species = 'all_slm'
 side = 'v'
 color = 'rgb'
 sigma = '4'
@@ -29,7 +29,7 @@ show = False
 extra = True
 
 # Load model
-model = load_model('./lm_scripts/saved_models/unet/save/unet1_all_v_rgb_800e.hdf5')
+model = load_model('./lm_scripts/saved_models/unet/save/unet1_all_slm_d_rgb_sigma4_350e.hdf5')
 #model = load_model('./lm_scripts/saved_models/unet/unet1_'+species+'_'+side+'_'+color+'_sigma'+sigma+'.hdf5')
 
 # Path to rescaled test set
@@ -45,7 +45,8 @@ org_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+species+'/'+side+'/testing/land
 
 image_size = (256,256,3) if color == 'rgb' else (256,256,1)
 channels = [3,1]
-N = 14 if side == 'v' else 18
+# N = 14 if side == 'v' else 18
+N = 15
 batch_size = 4
 
 #================ Mapping functions ===========================================

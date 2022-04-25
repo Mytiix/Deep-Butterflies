@@ -6,7 +6,7 @@ import os
 if __name__ == '__main__':
 	repository = 'D:\\Dataset_TFE\\images_v2'
 
-	for folder in glob.glob(repository+'/*/*'):
+	for folder in glob.glob(repository+'/all_slm/*'):
 
 		# Create directories
 		if not os.path.exists(folder+'/training'):

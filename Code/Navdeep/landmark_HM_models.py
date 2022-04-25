@@ -15,7 +15,7 @@ from tensorflow.keras.layers import (
 from tensorflow.keras import Input, Model
 
 #================= Keypoints ==================================================
-H, W, nKeypoints = 256,256,14
+H, W, nKeypoints = 256,256,15
 
 
 #==============================================================================
