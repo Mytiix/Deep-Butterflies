@@ -6,6 +6,7 @@
 - Comment présenter les résultats ? Séparer chaque méthode ou tout merge ? (Valider ce que j'ai fais dans results)
 - Demander si j'essaie Haar mm si long et pas forcément worth (+ dire que SURF pas implémenté)
 - Normal que ERT utilise des grayscale images ?
+- Do i try FCN8?
 
 
 ----------------------------------------------------------------------------------------------------------------
@@ -14,5 +15,5 @@
 - DL => "all" works well / even for slm
 - tried diff ratios val/train
 - give GitHub link
-- Did ERT in local
+- Did ERT in local => got all results
 - Got Alan Cluster account but didn't use due to queue
