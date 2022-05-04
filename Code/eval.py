@@ -75,8 +75,9 @@ if __name__ == '__main__':
 				mse[i] += dist ** 2
 				ht[i] += 1 if dist <= threshold else 0
 		
-		mse /= nb_im
 		rmse = np.sqrt(mse)
+		rmse /= nb_im
+		mse /= nb_im
 		ht /= nb_im
 		ht *= 100
 

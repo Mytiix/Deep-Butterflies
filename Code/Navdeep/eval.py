@@ -20,17 +20,17 @@ from sklearn.metrics import mean_squared_error
 from tensorflow.keras.models import Model, load_model
 
 # Params
-species = 'all_slm'
+species = 'polyphemus'
 side = 'v'
 color = 'rgb'
-sigma = '4'
-savefig = True
+sigma = '3'
+savefig = False
 show = False
-extra = True
+extra = False
 
 # Load model
-model = load_model('./lm_scripts/saved_models/unet/save/unet1_all_slm_d_rgb_sigma4_350e.hdf5')
-#model = load_model('./lm_scripts/saved_models/unet/unet1_'+species+'_'+side+'_'+color+'_sigma'+sigma+'.hdf5')
+# model = load_model('./lm_scripts/saved_models/unet/save/unet1_all_slm_v_rgb_sigma4_450e.hdf5')
+model = load_model('./lm_scripts/saved_models/unet/unet1_'+species+'_'+side+'_'+color+'_sigma'+sigma+'.hdf5')
 
 # Path to rescaled test set
 test_images = glob.glob('D:/Dataset_TFE/images_v2/'+species+'/'+side+'/testing/rescaled/images/*.png')
@@ -45,8 +45,8 @@ org_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+species+'/'+side+'/testing/land
 
 image_size = (256,256,3) if color == 'rgb' else (256,256,1)
 channels = [3,1]
-# N = 14 if side == 'v' else 18
-N = 15
+N = 14 if side == 'v' else 18
+# N = 15
 batch_size = 4
 
 #================ Mapping functions ===========================================
@@ -196,7 +196,7 @@ if extra:
 	plt.xlabel('Threshold value')
 	plt.ylabel('Hit Rate')
 	plt.plot(mean_ht)
-	plt.savefig('mean_ht_'+filename+'.pdf')
+	plt.savefig('figures/mean_ht_'+filename+'.pdf')
 	plt.show()
 
 
@@ -219,5 +219,5 @@ if extra:
 	plt.ylabel('Hit Rate')
 	for i in range(N):
 		plt.plot(ht_lm[:,i])
-	plt.savefig('ht_lm_'+filename+'.pdf')
+	plt.savefig('figures/ht_lm_'+filename+'.pdf')
 	plt.show()

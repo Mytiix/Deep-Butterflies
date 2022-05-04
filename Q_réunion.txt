@@ -1,0 +1,18 @@
+- Comment citer le travail de Navdeep?
+- Worth de montrer les résultats par espèces depuis un modèle all (DL) ? Pour comparer avec ERT
+  A voir résultats qd je train que sur 1 espèce avec tweak de param
+- Séparer Intro/Problem&Dataset ?
+- Add slm var/std to table?
+- Comment présenter les résultats ? Séparer chaque méthode ou tout merge ? (Valider ce que j'ai fais dans results)
+- Demander si j'essaie Haar mm si long et pas forcément worth (+ dire que SURF pas implémenté)
+- Normal que ERT utilise des grayscale images ?
+
+
+----------------------------------------------------------------------------------------------------------------
+
+- Structure tfe
+- DL => "all" works well / even for slm
+- tried diff ratios val/train
+- give GitHub link
+- Did ERT in local
+- Got Alan Cluster account but didn't use due to queue

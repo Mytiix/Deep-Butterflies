@@ -6,9 +6,10 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
-from cytomine import Cytomine
 from cytomine.models import AnnotationCollection, TermCollection
+from cytomine import Cytomine
 
+from sklearn.metrics import mean_squared_error
 from shapely.geometry import Point
 
 from collections import defaultdict
@@ -54,7 +55,7 @@ if __name__ == '__main__':
 
 
 		# Get test set
-		nb_to_swap = len(images_list) // 5
+		nb_to_swap = len(images_list) // 4
 		for i in range(nb_to_swap):
 			images_to_pred.append(images_list.pop(random.randint(0, len(images_list)-i-1)))
 
@@ -91,27 +92,26 @@ if __name__ == '__main__':
 
 		# Evaluation
 		threshold = 30
-		mse = np.zeros(len(t))
+		rmse = np.zeros(len(t))
 		ht = np.zeros(len(t))
 		for i, term in enumerate(t):
-			mean_coord =  Point(mean_coords[term][0], mean_coords[term][1])
+			mean_coord =  np.array([mean_coords[term][0], mean_coords[term][1]])
 			for point in annot[term]:
-				dist = mean_coord.distance(point)
-				mse[i] += dist ** 2
+				gt_lm = np.array([point.x, point.y])
+				rmse[i] += mean_squared_error(mean_coord, gt_lm, squared=False)
+				dist = np.linalg.norm(mean_coord - gt_lm)
 				ht[i] += 1 if dist <= threshold else 0
-		
-		mse /= len(images_to_pred)
-		rmse = np.sqrt(mse)
+			
+		rmse /= len(images_to_pred)
 		ht /= len(images_to_pred)
 		ht *= 100
 
 		hit_rate = ['{:.2f}%'.format(v) for v in ht]
-		table = reversed(list(zip(t, mse, rmse, hit_rate)))
+		table = reversed(list(zip(t, rmse, hit_rate)))
 		print('\n')
-		print(tabulate(table, headers=['Term', 'mse', 'rmse', 'ht']))
+		print(tabulate(table, headers=['Term', 'rmse', 'ht']))
 
 		print('\n')
-		print(f'Mean MSE => {np.mean(mse)}')
 		print(f'Mean RMSE => {np.mean(rmse)}')
 		print(f'Mean Hit Rate => {np.mean(ht)}%')
 		

@@ -1,0 +1,26 @@
+Test results with different ratio between train/val set (~100 images tot/~30 test). 1000 epochs each
+
+amathonte_menelaus_godartii v rgb / ratio 9/1
+Mean RMSE => 20.417147420627842
+Mean Hit Rate => 85.26785714285714
+
+amathonte_menelaus_godartii v rgb / ratio 8/2
+Mean RMSE => 25.077123268101772
+Mean Hit Rate => 84.375
+
+amathonte_menelaus_godartii v rgb / ratio 7/3
+Mean RMSE => 15.995201453677094
+Mean Hit Rate => 87.5
+
+amathonte_menelaus_godartii v rgb / ratio 6/4
+Mean RMSE => 17.645159447932542
+Mean Hit Rate => 86.38392857142857
+
+amathonte_menelaus_godartii v rgb / ratio 5/5
+Mean RMSE => 76.49556928078593
+Mean Hit Rate => 27.678571428571427
+
+amathonte_menelaus_godartii v rgb / ratio 4/6
+
+
+amathonte_menelaus_godartii v rgb / ratio 3/7

@@ -41,8 +41,8 @@ if __name__ == '__main__':
 		t = [str(i) + '-v-lm' for i in range(1,15)] + [str(i) + '-d-lm' for i in range(1,19)]
 
 		# Read image
-		image_path = 'tif/PB13.0121-d.tif'
-		image_id = 536138331
+		image_path = 'tif/PB13.0121-v.tif'
+		image_id = 536139760
 		image = cv2.imread(image_path)
 		width = image.shape[1]
 		height = image.shape[0]

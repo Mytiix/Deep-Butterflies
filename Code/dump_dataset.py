@@ -42,18 +42,19 @@ def dump_images(images_list, repository):
 				ypos[(annotation.term[0], image.id)] = image.height - int(cy[0])
 				terms[annotation.term[0]] = 1
 
-	if not os.path.exists(repository+'/landmarks/'):
-		os.makedirs(repository+'/landmarks/')
+	if not os.path.exists(repository+'/landmarks_v2/'):
+		os.makedirs(repository+'/landmarks_v2/')
 
 	for image in images_list:
-		file = open(repository+'/landmarks/%d.txt' % image.id, 'w')
+		file = open(repository+'/landmarks_v2/%d.txt' % image.id, 'w')
 		for t in terms.keys():
 			if (t, image.id) in xpos:
-				file.write('%d %d\n' % (
+				file.write('%d %d %d %f %f\n' % (
+					t,
 					xpos[(t, image.id)], 
-					ypos[(t, image.id)]))
-					#xpos[(t, image.id)] / float(image.width),
-					#ypos[(t, image.id)] / float(image.height)))
+					ypos[(t, image.id)],
+					xpos[(t, image.id)] / float(image.width),
+					ypos[(t, image.id)] / float(image.height)))
 		file.close()
 
 
@@ -81,6 +82,6 @@ if __name__ == '__main__':
 			images_list_v += v[1]
 
 		specie = 'all_slm'
-			
+		
 		dump_images(images_list_d, repository+specie+'/d')
 		dump_images(images_list_v, repository+specie+'/v')

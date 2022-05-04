@@ -1,0 +1,14 @@
+amathonte_menelaus_godartii v 
+Mean RMSE => 49.442659429649986
+Mean Hit Rate => 69.86607142857143
+20m / 30m
+
+Polyphemus v
+Mean RMSE => 29.78130866708806
+Mean Hit Rate => 79.59183673469386
+5m / 10m
+
+All d
+Mean RMSE => 45.825162752586614
+Mean Hit Rate => 72.60371959942775
+3h / 5h

@@ -49,9 +49,7 @@ def rescale_pad_img(image, landmarks, desired_size):
 	return pad_img, np.vstack((new_x, new_y)).T
 
 
-if __name__ == '__main__':
-	repository = 'D:\\Dataset_TFE\\images_v2\\all_slm\\v\\testing'
-
+def rescale(repository):
 	org_images = glob.glob(repository+'/images/*.tif')
 	org_lmks = glob.glob(repository+'/landmarks/*.txt')
 
@@ -67,3 +65,12 @@ if __name__ == '__main__':
 		re_img, re_lm = rescale_pad_img(img, lm, 256)
 		cv.imwrite(repository+'/rescaled/images/'+str(i+1).zfill(3)+'.png', re_img)
 		np.savetxt(repository+'/rescaled/landmarks/'+str(i+1).zfill(3)+'.txt', re_lm, fmt='%d')
+
+if __name__ == '__main__':
+	repository = 'D:/Dataset_TFE/images_v2/polyphemus/'
+
+	rescale(repository+'v/testing')
+	rescale(repository+'d/testing')
+	rescale(repository+'v/training')
+	rescale(repository+'d/training')
+

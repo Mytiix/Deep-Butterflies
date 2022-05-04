@@ -133,7 +133,7 @@ if __name__ == "__main__":
 	"""
 
 	# Params
-	species = 'all_slm'
+	species = 'polyphemus'
 	side = 'v'
 	color = 'rgb'
 	
@@ -146,8 +146,8 @@ if __name__ == "__main__":
 	
 	image_size = (256,256,3) if color == 'rgb' else (256,256,1) # input image size to the model
 	channels = [3,1]  #for decoding images in tf 3:RGB, 1:gray
-	# N = 14 if side == 'v' else 18 #number of landmarks
-	N = 15
+	N = 14 if side == 'v' else 18 #number of landmarks
+	# N = 15
 	seed = 44 # to generate the same indexes for each re-run
 	
 	image_paths = glob.glob(os.path.join(repository,'images/*.png'))
@@ -165,7 +165,7 @@ if __name__ == "__main__":
 
 #============== tf dataset generation =========================================
 		
-	train_idxs, val_idxs = train_test_split(idxs, test_size=0.10, random_state=seed) 
+	train_idxs, val_idxs = train_test_split(idxs, test_size=0.1, random_state=seed) 
 	
 	train_images = [image_paths[i] for i in train_idxs]
 	train_lmks = [kp_list[i] for i in train_idxs]

@@ -24,7 +24,6 @@ if __name__ == '__main__':
 	parser.add_argument('--private_key', dest='private_key', help="The Cytomine private key")
 	parser.add_argument('--project_id', dest='project_id', required=True, help="The project from which we want the images")
 	parser.add_argument('--job_id', dest='job_id', required=True, help="The job from which the images were created")
-	parser.add_argument('--image_id', dest='image_id', required=True, help="The image to plot")
 	params, _ = parser.parse_known_args(sys.argv[1:])
 
 	with Cytomine(host=params.host, public_key=params.public_key, private_key=params.private_key) as cytomine:
@@ -36,33 +35,34 @@ if __name__ == '__main__':
 
 		# Read image
 		image_path = 'tif/PB13.0906-d.tif'
+		image_id = 538782303
 		image = cv2.imread(image_path)
 		height = image.shape[0]
 		
 		# Write ground truth annotations
 		annotations = AnnotationCollection()
 		annotations.project = params.project_id
-		annotations.image = params.image_id
+		annotations.image = image_id
 		annotations.showTerm = True
 		annotations.showWKT = True
 		annotations.fetch()
 		for annotation in annotations:
 			if terms_names[annotation.term[0]] in t:
 				point = wkt.loads(annotation.location)
-				image = cv2.circle(image, (int(point.x), height-int(point.y)), radius=15, color=(0,0,255), thickness=-1)
-				#image = cv2.circle(image, (int(point.x), height-int(point.y)), radius=30, color=(0,255,0), thickness=3)				
+				image = cv2.circle(image, (int(point.x), height-int(point.y)), radius=5, color=(255,0,0), thickness=-1)
+				image = cv2.circle(image, (int(point.x), height-int(point.y)), radius=30, color=(0,255,0), thickness=3)				
 
 
 		# Write predicted annotations
 		annotations = AnnotationCollection()
 		annotations.project = params.project_id
-		annotations.image = params.image_id
+		annotations.image = image_id
 		annotations.job = params.job_id
 		annotations.showTerm = True
 		annotations.showWKT = True
 		annotations.fetch()
 		for annotation in annotations:
 			point = wkt.loads(annotation.location)
-			image = cv2.circle(image, (int(point.x), height-int(point.y)), radius=15, color=(255,0,0), thickness=-1)	
+			image = cv2.circle(image, (int(point.x), height-int(point.y)), radius=5, color=(0,0,255), thickness=-1)	
 
 		cv2.imwrite('im.png', image)
