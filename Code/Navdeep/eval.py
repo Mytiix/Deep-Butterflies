@@ -196,7 +196,7 @@ if extra:
 	plt.xlabel('Threshold value')
 	plt.ylabel('Hit Rate')
 	plt.plot(mean_ht)
-	plt.savefig('figures/mean_ht_'+filename+'.pdf')
+	plt.savefig('figures/dl_mean_ht_'+filename+'.pdf')
 	plt.show()
 
 
@@ -219,5 +219,5 @@ if extra:
 	plt.ylabel('Hit Rate')
 	for i in range(N):
 		plt.plot(ht_lm[:,i])
-	plt.savefig('figures/ht_lm_'+filename+'.pdf')
+	plt.savefig('figures/dl_ht_lm_'+filename+'.pdf')
 	plt.show()

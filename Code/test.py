@@ -145,6 +145,8 @@ if __name__ == '__main__':
 
 # python plot_mean_baseline.py --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --side v --term 14 --species amphitryon --npred 30000
 
+# python mean_baseline.py --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --side v --species all
+
 # python run.py --side v --species polyphemus --model_njobs 4 --model_RMAX 100 --model_R 6 --model_P 3 --model_npred 50000 --model_ntrees 50 --model_ntimes 1 --model_angle 10 --model_depth 5 --model_step 1 --model_wsize 8 --model_feature_type raw --model_feature_haar 1600 --model_feature_gaussian_n 1600 --model_feature_gaussian_std 20
 
 ####### MODELS

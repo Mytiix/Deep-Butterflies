@@ -211,9 +211,9 @@ def main():
 
 
 	# Plot/Save results
+	filename = params.species+'_'+params.side
 	if savefig:
 		org_images = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/images/*.tif')
-		filename = params.species+'_'+params.side
 
 		if not os.path.exists('images/'+filename):
 				os.makedirs('images/'+filename)
@@ -259,7 +259,7 @@ def main():
 		plt.xlabel('Threshold value')
 		plt.ylabel('Hit Rate')
 		plt.plot(mean_ht)
-		plt.savefig('figures/mean_ht_'+filename+'.pdf')
+		plt.savefig('figures/ml_mean_ht_'+filename+'.pdf')
 		plt.show()
 
 
@@ -282,7 +282,7 @@ def main():
 		plt.ylabel('Hit Rate')
 		for i in range(len(annot)):
 			plt.plot(ht_lm[:,i])
-		plt.savefig('figures/ht_lm_'+filename+'.pdf')
+		plt.savefig('figures/ml_ht_lm_'+filename+'.pdf')
 		plt.show()
 
 if __name__ == "__main__":
