@@ -5,27 +5,29 @@ Created on Mon Mar 28 10:18:08 2022
 @author: Navdeep Kumar
 """
 
-import numpy as np
-import pandas as pd
+from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, TensorBoard
+from tensorflow.keras.optimizers import RMSprop
+from sklearn.model_selection import train_test_split
+from datetime import datetime
+
+from landmark_HM_models import *
+
+import tensorflow.keras.backend as K
 import matplotlib.pyplot as plt
-import os
+import albumentations as A
+import tensorflow as tf
+import numpy as np
+import cv2 as cv
+
 import random
 import glob
 import math
 import sys
-import albumentations as A
-import tensorflow as tf
-import cv2 as cv
-import tensorflow.keras.backend as K
-from tensorflow.keras.preprocessing.image import load_img, img_to_array, array_to_img
-from tensorflow.keras.callbacks import CSVLogger, EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, TensorBoard
-from tensorflow.keras.optimizers import SGD, RMSprop, Adam
-from tensorflow.keras import utils
-from landmark_HM_models import *
-from datetime import datetime
-from sklearn.model_selection import train_test_split
-os.environ["CUDA_VISIBLE_DEVICES"]="0"
+import os
+
 from tensorflow.python.client import device_lib
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
 print (device_lib.list_local_devices())
 
 #========================== Functions =========================================
@@ -133,9 +135,10 @@ if __name__ == "__main__":
 	"""
 
 	# Params
-	species = 'polyphemus'
+	species = 'all'
 	side = 'v'
 	color = 'rgb'
+	from_save = True
 	
 	repository = 'D:/Dataset_TFE/images_v2/'+species+'/'+side+'/training/rescaled'
 	filename = species+'_'+side+'_'+color
@@ -195,20 +198,24 @@ if __name__ == "__main__":
 	model_name = 'unet' # or FCN8
 	filepath="./lm_scripts/saved_models/unet/"+model_name+str(1)+'_'+filename+'_sigma'+str(sigma)+".hdf5"
 	log_dir="./lm_scripts/logs/fit/"+datetime.now().strftime("%Y%m%d-%H%M%S")
-	early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=100, mode='min')
+	# early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=100, mode='min')
 	checkpoint = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
-	reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
-								  patience=50, mode='min', min_lr=0.00001)
-	tensor_board = TensorBoard(log_dir=log_dir, histogram_freq=1, write_graph=True,
-													  write_images=False)
-	#callbacks = [checkpoint, tensor_board, early_stopping, reduce_lr]
+	# reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
+	# 							  patience=50, mode='min', min_lr=0.00001)
+	# tensor_board = TensorBoard(log_dir=log_dir, histogram_freq=1, write_graph=True,
+	# 												  write_images=False)
+	# callbacks = [checkpoint, tensor_board, early_stopping, reduce_lr]
 	callbacks = [checkpoint]
-		
-	optim = RMSprop(learning_rate=0.001)
-	rmse = tf.keras.metrics.RootMeanSquaredError()
-	mse = tf.keras.metrics.MeanSquaredError()
-	model = UNET(input_shape=image_size)
-	model.compile(loss="mse", optimizer=optim, metrics=[rmse])
+	
+
+	if from_save:
+		model = tf.keras.models.load_model(filepath)
+	else:
+		optim = RMSprop(learning_rate=0.001)
+		rmse = tf.keras.metrics.RootMeanSquaredError()
+		mse = tf.keras.metrics.MeanSquaredError()
+		model = UNET(input_shape=image_size)
+		model.compile(loss="mse", optimizer=optim, metrics=[rmse])
 	history = model.fit(tr_ds, epochs=n_epochs, callbacks=callbacks,
 							validation_data=val_ds, steps_per_epoch=steps_per_epoch,
 							validation_steps= val_steps,verbose=1)

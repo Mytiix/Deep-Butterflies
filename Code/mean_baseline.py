@@ -37,6 +37,7 @@ if __name__ == '__main__':
 		terms_collection = TermCollection().fetch_with_filter("project", params.project_id)
 		terms_names = {term.id : term.name for term in terms_collection}
 		t = [str(i) + '-v-lm' for i in range(1,15)] if params.side == 'v' else [str(i) + '-d-lm' for i in range(1,19)]
+		#t = [str(i) + '-v-slm' for i in range(15,30)] if params.side == 'v' else [str(i) + '-d-slm' for i in range(19,45)]
 
 		# Fetch training images
 		random.seed(0)

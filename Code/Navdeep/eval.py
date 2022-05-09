@@ -20,7 +20,7 @@ from sklearn.metrics import mean_squared_error
 from tensorflow.keras.models import Model, load_model
 
 # Params
-species = 'polyphemus'
+species = 'all'
 side = 'v'
 color = 'rgb'
 sigma = '3'
