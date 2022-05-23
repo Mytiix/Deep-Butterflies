@@ -158,7 +158,7 @@ def main():
 			feature_parameters = None
 			if parameters_hash['feature_type'] in ['haar', 'gaussian']:
 				fparameters_filepath = tr_out_repo+str(id_term)+'_fparameters.joblib'
-				feature_parameters = joblib.load(fparametersl_filepath)
+				feature_parameters = joblib.load(fparameters_filepath)
 
 			# Get prediction for each images
 			for id_img in list_imgs:
@@ -196,7 +196,9 @@ def main():
 	threshold = 30
 	rmse = np.zeros(len(annot))
 	ht = np.zeros(len(annot))
+	lm_ids = []
 	for i, (term, images) in enumerate(annot.items()):
+		lm_ids.append(term)
 		for v in images.values():
 			rmse[i] += mean_squared_error(v[0], v[1], squared=False)
 			dist = np.linalg.norm(v[0] - v[1])
@@ -206,7 +208,17 @@ def main():
 	ht /= len(files)
 	ht *= 100
 
-	print(f'Mean RMSE => {np.mean(rmse)}')
+	# Print evaluation per landmark
+	with open('terms_names.pkl', 'rb') as file:
+		terms_names = pickle.load(file)
+
+	rmse_lm = {terms_names[lm_ids[i]] : (rmse[i], ht[i]) for i in range(len(annot))}
+	print('LM name => rmse, ht')
+	for k, v in sorted(rmse_lm.items()):
+		print(k, '=>', '{:.2f}'.format(v[0]), ', {:.2f}%'.format(v[1]))
+
+	# Print evaluation mean of every landmark
+	print(f'\nMean RMSE => {np.mean(rmse)}')
 	print(f'Mean Hit Rate => {np.mean(ht)}%')
 
 

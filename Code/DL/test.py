@@ -36,7 +36,7 @@ if __name__ == '__main__':
 	# # lm_ids = [540037091, 540037085, 540037077, 540037069, 540037059, 540037053, 540037045, 540037039, 540037031,
 	# # 		540037005, 540036993, 540036985, 540036979, 540036969]
 
-	subspecies = 'theseus'
+	subspecies = 'polyphemus'
 
 	for file in glob.glob(repository+'/'+subspecies+'/d/testing/landmarks_v2/*.txt'):
 		resort(file)

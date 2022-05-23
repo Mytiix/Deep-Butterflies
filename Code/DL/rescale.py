@@ -67,7 +67,7 @@ def rescale(repository):
 		np.savetxt(repository+'/rescaled/landmarks_v2/'+str(i+1).zfill(3)+'.txt', re_lm, fmt='%d')
 
 if __name__ == '__main__':
-	repository = 'D:/Dataset_TFE/images_v2/all_slm/'
+	repository = 'D:/Dataset_TFE/images_v2/granadensis/'
 
 	rescale(repository+'v/testing')
 	rescale(repository+'d/testing')

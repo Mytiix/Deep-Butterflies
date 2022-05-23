@@ -59,10 +59,10 @@ if __name__ == '__main__':
 
 		
 		# Print sp data
-		# with open('sp.pkl', 'rb') as file:
-		# 	sp = pickle.load(file)
-		# table = [[k, len(v[0]), len(v[1]), len(v[2]), len(v[3])] for k, v in sp.items()]
-		# print(tabulate(table, headers=['Specie', 'd', 'v', 'd0', 'v0']))
+		with open('sp.pkl', 'rb') as file:
+			sp = pickle.load(file)
+		table = [[k, len(v[0]), len(v[1]), len(v[2]), len(v[3])] for k, v in sp.items()]
+		print(tabulate(table, headers=['Specie', 'd', 'v', 'd0', 'v0']))
 		
 			
 		
@@ -95,14 +95,18 @@ if __name__ == '__main__':
 				images_ids[image.filename] = [image.id]
 		'''
 		
-		images_ids = {image.filename : image.id for image in image_instances}
-		terms_ids = {term.name : term.id for term in terms}
-		terms_names = {term.id : term.name for term in terms}
+		# images_ids = {image.filename : image.id for image in image_instances}
+		# terms_ids = {term.name : term.id for term in terms}
+		# terms_names = {term.id : term.name for term in terms}
 
-		print(terms_names[539978547])
-		print(terms_names[539978278])
-		print(terms_names[539978532])
-		print(terms_names[539978259])
+		# file = open('terms_names.pkl', 'wb')
+		# pickle.dump(terms_names, file)
+		# file.close()
+
+		# print(terms_names[539978547])
+		# print(terms_names[539978278])
+		# print(terms_names[539978532])
+		# print(terms_names[539978259])
 		# for k,v in terms_ids.items():
 		# 	print(k,v)
 		'''

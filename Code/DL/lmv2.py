@@ -4,7 +4,7 @@ import glob
 import os
 
 if __name__ == '__main__':
-	repository = 'D:/Dataset_TFE/images_v2/granadensis/v'
+	repository = 'D:/Dataset_TFE/images_v2/polyphemus/d'
 
 	os.makedirs(repository+'/training/landmarks_v2')
 	os.makedirs(repository+'/testing/landmarks_v2')

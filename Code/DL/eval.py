@@ -9,6 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import random
+import pickle
 import glob
 import tensorflow as tf
 import cv2 as cv
@@ -20,16 +21,16 @@ from sklearn.metrics import mean_squared_error
 from tensorflow.keras.models import Model, load_model
 
 # Params
-species = 'all_slm'
+species = 'granadensis'
 side = 'v'
 color = 'rgb'
 sigma = '3'
-fct = 'gaussian'
+fct = 'exp'
 savefig = False
 extra = False
 
 # Load model
-# model = load_model('./lm_scripts/saved_models/unet/save/unet1_all_v_rgb_sigma4_800e.hdf5')
+# model = load_model('./lm_scripts/saved_models/unet/save/unet1_amathonte_menelaus_godartii_d_rgb.hdf5')
 model = load_model('./lm_scripts/saved_models/unet/unet1_'+species+'_'+side+'_'+color+'_sigma'+sigma+'_'+fct+'.hdf5')
 
 # Path to rescaled test set
@@ -45,8 +46,8 @@ org_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+species+'/'+side+'/testing/land
 
 image_size = (256,256,3) if color == 'rgb' else (256,256,1)
 channels = [3,1]
-# N = 14 if side == 'v' else 18
-N = 15 if side == 'v' else 26
+N = 14 if side == 'v' else 18
+# N = 15 if side == 'v' else 26
 batch_size = 4
 
 #================ Mapping functions ===========================================
@@ -108,15 +109,16 @@ org_landmarks = []
 pred_landmarks= []
 for i in range(len(test_images)):
 	org_img = cv.imread(org_images[i])
+	lm_ids = np.loadtxt(org_lmks[i])[:,0:1]
 	org_lm = np.loadtxt(org_lmks[i])[:,1:3]
 	pred_mask = preds[i]
 	pred_mask = np.reshape(pred_mask, newshape=(256,256, N))
 	lm_list = []
 
 
-	# # Plot heatmap
+	# Plot heatmap
 	# heat_map = np.sum(pred_mask, axis=2)
-	# plt.imshow(heat_map, cmap='hot', interpolation='nearest')
+	# plt.imshow(pred_mask[:,:,0], cmap='hot', interpolation='nearest')
 	# plt.axis('off')
 	# plt.show()
 	
@@ -130,29 +132,44 @@ for i in range(len(test_images)):
 	org_landmarks.append(org_lm)
 	pred_landmarks.append(up_lmks)
 
-# Compute RMSE
-error = []
-for k in range(len(org_landmarks)):
-	g = org_landmarks[k]
-	p = pred_landmarks[k]
-	mse = mean_squared_error(g, p, squared=False)
-	error.append(mse)
-mean_error = np.array(error).mean()
-print('Mean RMSE =>', mean_error)
+# # Compute RMSE
+# error = []
+# for k in range(len(org_landmarks)):
+# 	g = org_landmarks[k]
+# 	p = pred_landmarks[k]
+# 	mse = mean_squared_error(g, p, squared=False)
+# 	error.append(mse)
+# mean_error = np.array(error).mean()
 
-# Compute Hit Rate
+
+# Compute RMSE/Hit Rate
 threshold = 30
+rmse = np.zeros(N)
 ht = np.zeros(N)
 for i in range(len(org_landmarks)):
 	for j in range(N):
 		g_lm = org_landmarks[i][j]
 		p_lm = pred_landmarks[i][j]
 		
+		rmse[j] += mean_squared_error(p_lm, g_lm, squared=False)
 		dist = np.linalg.norm(g_lm - p_lm)
 		ht[j] += 1 if dist <= threshold else 0
 
+rmse /= len(org_landmarks)
 ht /= len(org_landmarks)
 ht *= 100
+
+# Print evaluation per landmark
+with open('terms_names.pkl', 'rb') as file:
+	terms_names = pickle.load(file)
+
+rmse_lm = {terms_names[lm_ids[i,0]] : (rmse[i], ht[i]) for i in range(N)}
+print('LM name => rmse, ht')
+for k, v in sorted(rmse_lm.items()):
+	print(k, '=>', '{:.2f}'.format(v[0]), ', {:.2f}%'.format(v[1]))
+
+# Print evaluation mean of every landmark
+print(f'\nMean RMSE => {np.mean(rmse)}')
 print(f'Mean Hit Rate => {np.mean(ht)}%')
 
 # Plot/Save results

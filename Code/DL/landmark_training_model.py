@@ -68,7 +68,7 @@ transforms = A.Compose([
 def aug_fn(image, lm):
 	image = tf.keras.preprocessing.image.img_to_array(image, dtype=np.uint8)
 	lm = lm.numpy()
-	aug_data = transforms(image=image, keypoints = lm)
+	aug_data = transforms(image=image, keypoints=lm)
 	image_aug = aug_data['image'] 
 	lm_aug = aug_data['keypoints']
 	lm_aug = np.array(lm_aug, dtype=np.int32)
@@ -135,10 +135,10 @@ if __name__ == "__main__":
 	"""
 
 	# Params
-	species = 'all_slm'
+	species = 'granadensis'
 	side = 'v'
 	color = 'rgb'
-	fct = 'gaussian'
+	fct = 'exp'
 	from_save = False
 	
 	repository = 'D:/Dataset_TFE/images_v2/'+species+'/'+side+'/training/rescaled'
@@ -150,8 +150,8 @@ if __name__ == "__main__":
 	
 	image_size = (256,256,3) if color == 'rgb' else (256,256,1) # input image size to the model
 	channels = [3,1]  #for decoding images in tf 3:RGB, 1:gray
-	# N = 14 if side == 'v' else 18 #number of landmarks
-	N = 15 if side == 'v' else 26
+	N = 14 if side == 'v' else 18 #number of landmarks
+	# N = 15 if side == 'v' else 26
 	seed = 44 # to generate the same indexes for each re-run
 	
 	image_paths = glob.glob(os.path.join(repository,'images/*.png'))

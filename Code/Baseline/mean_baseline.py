@@ -31,13 +31,13 @@ if __name__ == '__main__':
 	params, _ = parser.parse_known_args(sys.argv[1:])
 
 	# Extra params
-	savefig = True
-	extra = True
+	savefig = False
+	extra = False
 
 	# Define repositories
 	train_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/training/landmarks/*.txt')
 	org_images = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/images/*.tif')
-	org_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/landmarks/*.txt')
+	org_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/landmarks_v2/*.txt')
 
 	
 	# Compute mean coords of training samples
@@ -53,8 +53,10 @@ if __name__ == '__main__':
 	for file in org_lmks:
 		org_lm = []
 		pred_lm = []
+		lm_ids = []
 		for i, gt_lm in enumerate(np.loadtxt(file)):
-			org_lm.append([gt_lm[0], gt_lm[1]])
+			lm_ids.append(gt_lm[0])
+			org_lm.append([gt_lm[1], gt_lm[2]])
 			pred_lm.append([mean_coords[i][0], mean_coords[i][1]])
 		org_landmarks.append(np.array(org_lm))
 		pred_landmarks.append(np.array(pred_lm))
@@ -76,8 +78,17 @@ if __name__ == '__main__':
 	ht /= len(org_landmarks)
 	ht *= 100
 
-	print('\n')
-	print(f'Mean RMSE => {np.mean(rmse)}')
+	# Print evaluation per landmark
+	with open('terms_names.pkl', 'rb') as file:
+		terms_names = pickle.load(file)
+
+	rmse_lm = {terms_names[lm_ids[i]] : (rmse[i], ht[i]) for i in range(len(mean_coords))}
+	print('LM name => rmse, ht')
+	for k, v in sorted(rmse_lm.items()):
+		print(k, '=>', '{:.2f}'.format(v[0]), ', {:.2f}%'.format(v[1]))
+
+	# Print evaluation mean of every landmark
+	print(f'\nMean RMSE => {np.mean(rmse)}')
 	print(f'Mean Hit Rate => {np.mean(ht)}%')
 	
 	# Plot/Save results
