@@ -118,8 +118,8 @@ def main():
 	params, _ = parser.parse_known_args(sys.argv[1:])
 
 	# Extra params
-	savefig = False
-	extra = False
+	savefig = True
+	extra = True
 
 	# Define repositories
 	repository = 'D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/'
