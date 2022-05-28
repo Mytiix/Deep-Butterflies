@@ -138,7 +138,7 @@ if __name__ == "__main__":
 	species = 'granadensis'
 	side = 'v'
 	color = 'rgb'
-	fct = 'exp'
+	fct = 'gaussian'
 	from_save = False
 	
 	repository = 'D:/Dataset_TFE/images_v2/'+species+'/'+side+'/training/rescaled'

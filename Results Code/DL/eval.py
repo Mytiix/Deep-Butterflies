@@ -21,11 +21,11 @@ from sklearn.metrics import mean_squared_error
 from tensorflow.keras.models import Model, load_model
 
 # Params
-species = 'granadensis'
+species = 'all'
 side = 'v'
 color = 'rgb'
-sigma = '3'
-fct = 'exp'
+sigma = '4'
+fct = 'gaussian'
 savefig = False
 extra = False
 
@@ -35,9 +35,9 @@ model = load_model('./lm_scripts/saved_models/unet/unet1_'+species+'_'+side+'_'+
 
 # Path to rescaled test set
 test_images = glob.glob('D:/Dataset_TFE/images_v2/'+species+'/'+side+'/testing/rescaled/images/*.png')
-test_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+species+'/'+side+'/testing/rescaled/landmarks/*.txt')
+test_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+species+'/'+side+'/testing/rescaled/landmarks_v2/*.txt')
 
-# Path to original size test set
+# Path to original test set
 org_images = glob.glob('D:/Dataset_TFE/images_v2/'+species+'/'+side+'/testing/images/*.tif')
 org_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+species+'/'+side+'/testing/landmarks_v2/*.txt')
 

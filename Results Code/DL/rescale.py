@@ -49,25 +49,51 @@ def rescale_pad_img(image, landmarks, desired_size):
 	return pad_img, np.vstack((new_x, new_y)).T
 
 
+# def rescale(repository):
+# 	org_images = glob.glob(repository+'/images/*.tif')
+# 	org_lmks = glob.glob(repository+'/landmarks_v2/*.txt')
+
+# 	if not os.path.exists(repository+'/rescaled'):
+# 		os.makedirs(repository+'/rescaled')
+# 		os.makedirs(repository+'/rescaled/images')
+# 	os.makedirs(repository+'/rescaled/landmarks_v2')
+
+
+# 	for i in range(len(org_lmks)):
+# 		img = cv.imread(org_images[i], cv.IMREAD_UNCHANGED)
+# 		lm = np.loadtxt(org_lmks[i])[:,1:3]
+# 		re_img, re_lm = rescale_pad_img(img, lm, 256)
+# 		cv.imwrite(repository+'/rescaled/images/'+str(i+1).zfill(3)+'.png', re_img)
+# 		np.savetxt(repository+'/rescaled/landmarks_v2/'+str(i+1).zfill(3)+'.txt', re_lm, fmt='%d')
+
+# if __name__ == '__main__':
+# 	repository = 'D:/Dataset_TFE/images_v2/niepelti/'
+
+# 	rescale(repository+'v/testing')
+# 	rescale(repository+'d/testing')
+# 	rescale(repository+'v/training')
+# 	rescale(repository+'d/training')
+
 def rescale(repository):
 	org_images = glob.glob(repository+'/images/*.tif')
 	org_lmks = glob.glob(repository+'/landmarks_v2/*.txt')
 
-	if not os.path.exists(repository+'/rescaled'):
-		os.makedirs(repository+'/rescaled')
-		os.makedirs(repository+'/rescaled/images')
-	os.makedirs(repository+'/rescaled/landmarks_v2')
+	if not os.path.exists(repository+'/rescaled_v2'):
+		os.makedirs(repository+'/rescaled_v2')
+		os.makedirs(repository+'/rescaled_v2/images')
+	os.makedirs(repository+'/rescaled_v2/landmarks_v2')
 
 
 	for i in range(len(org_lmks)):
 		img = cv.imread(org_images[i], cv.IMREAD_UNCHANGED)
 		lm = np.loadtxt(org_lmks[i])[:,1:3]
+		im_name = os.path.basename(org_lmks[i])[:-4]
 		re_img, re_lm = rescale_pad_img(img, lm, 256)
-		# cv.imwrite(repository+'/rescaled/images/'+str(i+1).zfill(3)+'.png', re_img)
-		np.savetxt(repository+'/rescaled/landmarks_v2/'+str(i+1).zfill(3)+'.txt', re_lm, fmt='%d')
+		cv.imwrite(repository+'/rescaled_v2/images/'+im_name+'.png', re_img)
+		np.savetxt(repository+'/rescaled_v2/landmarks_v2/'+im_name+'.txt', re_lm, fmt='%d')
 
 if __name__ == '__main__':
-	repository = 'D:/Dataset_TFE/images_v2/granadensis/'
+	repository = 'D:/Dataset_TFE/images_v2/all_slm/'
 
 	rescale(repository+'v/testing')
 	rescale(repository+'d/testing')

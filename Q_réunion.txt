@@ -1,2 +1,0 @@
-- Do i need loss graph ?
-- Add table with results for each subspecies with ALL model ?
