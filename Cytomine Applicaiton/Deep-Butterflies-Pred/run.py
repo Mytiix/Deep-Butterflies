@@ -146,7 +146,7 @@ def main(argv):
 		annotation_collection = AnnotationCollection()
 		for i, image in enumerate(pred_images):
 			for j in range(parameters_hash['N']):
-				lm = Point(pred_landmarks[i][j])
+				lm = Point(pred_landmarks[i][j][0], image.height - pred_landmarks[i][j][1])
 				annotation_collection.append(Annotation(location=lm.wkt, id_image=image.id, id_terms=[parameters_hash['cytomine_id_terms'][j]], id_project=cj.parameters.cytomine_id_project))
 		annotation_collection.save()
 

@@ -162,7 +162,7 @@ if __name__ == '__main__':
 
 ################################
 
-# python run.py --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --software_id 548726919 --images_to_predict 535635197,535656631 --model_to_use 548727214
+# python run.py --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --software_id 548726919 --images_to_predict 535635197,535656631 --model_to_use 548729686
 
 # python run.py --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --software_id 548724333 --cytomine_id_terms lm --cytomine_training_images 535594495,535606475,535609446,535662336,535751048,535756645,535758151,535759624,535763742,535765340 --butterfly_side ventral --model_epochs 10 --model_batch_size 1 --model_sigma 4 --model_probability_function gaussian
 
