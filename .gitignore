@@ -133,4 +133,10 @@ dmypy.json
 *.tif
 *.png
 *.v2
+*.pdf
 None/
+figures/
+images/
+pickle/
+lm_scripts/
+predictions/
