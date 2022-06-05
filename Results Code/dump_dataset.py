@@ -21,11 +21,11 @@ def dump_images(images_list, repository):
 
 	terms_collection = TermCollection().fetch_with_filter("project", params.project_id)
 	terms_names = {term.id : term.name for term in terms_collection}
-	#check_terms = [str(i) + '-v-lm' for i in range(1,15)] + [str(i) + '-d-lm' for i in range(1,19)]
-	check_terms = [str(i) + '-v-slm' for i in range(15,30)] + [str(i) + '-d-slm' for i in range(19,45)]
+	check_terms = [str(i).zfill(2) + '-v-lm' for i in range(1,15)] + [str(i).zfill(2) + '-d-lm' for i in range(1,19)] + \
+				  [str(i) + '-v-slm' for i in range(15,30)] + [str(i) + '-d-slm' for i in range(19,45)]
 
 	for image in images_list:
-		#image.download(dest_pattern=repository+'/images/%d.tif' % image.id)
+		# image.download(dest_pattern=repository+'/images/%d.tif' % image.id)
 
 		annotations = AnnotationCollection()
 		annotations.project = params.project_id
@@ -49,12 +49,12 @@ def dump_images(images_list, repository):
 		file = open(repository+'/landmarks_v2/%d.txt' % image.id, 'w')
 		for t in terms.keys():
 			if (t, image.id) in xpos:
-				file.write('%d %d %d %f %f\n' % (
+				file.write('%d %d %d\n' % (
 					t,
 					xpos[(t, image.id)], 
-					ypos[(t, image.id)],
-					xpos[(t, image.id)] / float(image.width),
-					ypos[(t, image.id)] / float(image.height)))
+					ypos[(t, image.id)],))
+					# xpos[(t, image.id)] / float(image.width),
+					# ypos[(t, image.id)] / float(image.height)))
 		file.close()
 
 
@@ -81,7 +81,7 @@ if __name__ == '__main__':
 			images_list_d += v[0]
 			images_list_v += v[1]
 
-		specie = 'all_slm'
+		specie = 'all_lm_slm'
 		
 		dump_images(images_list_d, repository+specie+'/d')
 		dump_images(images_list_v, repository+specie+'/v')

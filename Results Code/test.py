@@ -156,9 +156,29 @@ if __name__ == '__main__':
 
 # python mean_baseline.py --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --side v --species all
 
-# python run.py --side v --species polyphemus --model_njobs 4 --model_RMAX 100 --model_R 6 --model_P 3 --model_npred 50000 --model_ntrees 50 --model_ntimes 1 --model_angle 10 --model_depth 5 --model_step 1 --model_wsize 8 --model_feature_type raw --model_feature_haar 1600 --model_feature_gaussian_n 1600 --model_feature_gaussian_std 20
+# python run.py --side d --species all --model_njobs 8 --model_RMAX 100 --model_R 10 --model_P 3 --model_npred 30000 --model_ntrees 50 --model_ntimes 1 --model_angle 10 --model_depth 5 --model_step 3 --model_wsize 8 --model_feature_type gaussian --model_feature_haar 1600 --model_feature_gaussian_n 1600 --model_feature_gaussian_std 20
 
 # python .\generate_tps.py --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --side v --species all
+
+################################
+
+# python run.py --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --software_id 548726919 --images_to_predict 535635197,535656631 --model_to_use 548727214
+
+# python run.py --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --software_id 548724333 --cytomine_id_terms lm --cytomine_training_images 535594495,535606475,535609446,535662336,535751048,535756645,535758151,535759624,535763742,535765340 --butterfly_side ventral --model_epochs 10 --model_batch_size 1 --model_sigma 4 --model_probability_function gaussian
+
+# docker build -t pred .
+# docker run pred --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --software_id 548726919 --images_to_predict 535635197,535656631 --model_to_use 548727214
+
+# docker build -t train .
+# docker run train --host https://research.cytomine.be --public_key 50af36d2-3ccc-4928-a21d-aab32e437fbf --private_key 49725276-a001-4d25-9800-76409c8aad9a --project_id 535588540 --software_id 548724333 --cytomine_id_terms lm --cytomine_training_images 535594495,535606475,535609446,535662336,535751048,535756645,535758151,535759624,535763742,535765340 --butterfly_side ventral --model_epochs 10 --model_batch_size 1 --model_sigma 4 --model_probability_function gaussian
+
+
+
+
+
+
+################################
+
 
 ####### MODELS
 
@@ -244,3 +264,9 @@ if __name__ == '__main__':
 #   - Try and lanch without it DONE
 # - Try with clean new projects ?
 # - Error 404 on link in email (Computer Vision slm)
+
+
+# # Add terms' id as property of the job
+# property_name = ''
+# property_name.join([str(x) + ' ' for x in terms_ids]).rstrip()
+# Property(cj.job, key='terms_ids', value=property_name)

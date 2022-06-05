@@ -4,7 +4,7 @@ import glob
 import os
 
 if __name__ == '__main__':
-	repository = 'D:/Dataset_TFE/images_v2/all_slm_v2'
+	repository = 'D:/Dataset_TFE/images_v2/all_lm_slm'
 
 	for folder in glob.glob(repository+'/*'):	
 		lm = [os.path.basename(f)[:-4]+'.txt' for f in glob.glob(folder+'/training/images/*.tif')]

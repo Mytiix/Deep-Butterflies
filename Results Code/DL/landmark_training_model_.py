@@ -1,37 +1,24 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 28 10:18:08 2022
 
-#
-# * Copyright (c) 2009-2016. Authors: see NOTICE file.
-# *
-# * Licensed under the Apache License, Version 2.0 (the "License");
-# * you may not use this file except in compliance with the License.
-# * You may obtain a copy of the License at
-# *
-# *      http://www.apache.org/licenses/LICENSE-2.0
-# *
-# * Unless required by applicable law or agreed to in writing, software
-# * distributed under the License is distributed on an "AS IS" BASIS,
-# * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# * See the License for the specific language governing permissions and
-# * limitations under the License.
-# */
-
-__author__ = "Navdeep Kumar <nkumar@uliege.be>"
-__contributors__ = ["Marganne Louis <louis.marganne@student.uliege.be>"]
+@author: Navdeep Kumar
+"""
 
 from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, TensorBoard
 from tensorflow.keras.optimizers import RMSprop
-from tensorflow.keras.callbacks import ModelCheckpoint
-
 from sklearn.model_selection import train_test_split
+from datetime import datetime
 
-from cytomine import CytomineJob
+from landmark_HM_models import *
 
-from landmark_HM_models import UNET
-
+import tensorflow.keras.backend as K
+import matplotlib.pyplot as plt
 import albumentations as A
 import tensorflow as tf
 import numpy as np
+import cv2 as cv
 
 import random
 import glob
@@ -40,38 +27,44 @@ import sys
 import os
 
 from tensorflow.python.client import device_lib
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-print(device_lib.list_local_devices())
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
+print (device_lib.list_local_devices())
+
+#========================== Functions =========================================
+def parse_data(image, lm):
+	"""
+	Reads image and landmark files depending on
+	specified extension.
+	"""
+	image_content = tf.io.read_file(image)
+
+	chan = channels[0] if color == 'rgb' else channels[1]
+	image = tf.io.decode_png(image_content, channels=chan)
+	image = tf.image.resize(image, (256,256))
+	
+	#image = tf.image.resize_with_pad(image, 256,256) #if original images to be used to parse the data
+	
+	return  image, lm
+
+def normalize(image, lm):
+	image = tf.cast(image, tf.float32)/255.0
+	return image, lm
 
 
-# Custom data augmentation
 transforms = A.Compose([
 					   A.RandomBrightnessContrast(),
 					   A.Affine(scale=(0.8,1), 
 								translate_px= (0, 10), 
 								rotate= (-10,10), 
 								shear=(0,10), 
-								interpolation=0, # nearest
-								mode=2, # mode replicate
-								fit_output=False), 
+								interpolation=0, #nearest
+								mode=2, fit_output=False), #mode replicate
 					   A.HorizontalFlip(p=0.3),
 					   ], 
 						keypoint_params=A.KeypointParams(format='xy',remove_invisible=False))
 
 
-# Read image and convert to tensorflow object
-def parse_data(image, lm):
-	image_content = tf.io.read_file(image)
-	image = tf.io.decode_png(image_content, channels=3)
-	image = tf.image.resize(image, (256,256))
-	return  image, lm
 
-# Normalize image
-def normalize(image, lm):
-	image = tf.cast(image, tf.float32)/255.0
-	return image, lm
-
-# Apply custom data augmentation
 def aug_fn(image, lm):
 	image = tf.keras.preprocessing.image.img_to_array(image, dtype=np.uint8)
 	lm = lm.numpy()
@@ -79,32 +72,34 @@ def aug_fn(image, lm):
 	image_aug = aug_data['image'] 
 	lm_aug = aug_data['keypoints']
 	lm_aug = np.array(lm_aug, dtype=np.int32)
+	
 	return image_aug, lm_aug
 
-# Apply custom data augmentation through py_function
 def aug_apply(image,lm):
 	image, lm = tf.py_function(aug_fn, (image, lm), (tf.float32, tf.float32))
 	image.set_shape(image_size)
 	lm.set_shape((N,2))
 	return image, lm
 
-# Exponential probability function which describes the spread of the heatmap
-def _exp(xL, yL, sigma, H, W):
+def _exp(xL, yL, sigma, H, W):  # Exponential kernel for genrating heatmaps
 	xx, yy = np.mgrid[0:H:1, 0:W:1]
 	kernel = np.exp(-np.log(2) * 0.5 * (np.abs(yy - xL) + np.abs(xx - yL)) / sigma)
 	kernel = np.float32(kernel)
+	
 	return kernel
 
-# Gaussian probibility function which describes the spread of the heatmap
 def _gaussian(xL, yL, sigma, H, W):
 	xx, yy = np.mgrid[0:H:1, 0:W:1]
 	kernel = np.exp(-0.5 * (np.square(yy - xL) + np.square(xx - yL)) / np.square(sigma))
 	kernel = np.float32(kernel)
+	 
 	return kernel
 
 
-# Convert an image to an heatmap
+# convert image to heatmap
 def _convertToHM(img, keypoints):
+
+	#sigma = 3
 	H = img.shape[0]
 	W = img.shape[1]
 	nKeypoints = len(keypoints)
@@ -116,24 +111,32 @@ def _convertToHM(img, keypoints):
 		y = keypoints[i][1]
 
 		channel_hm = _exp(x, y, sigma, H, W) if fct == 'exp' else _gaussian(x, y, sigma, H, W)
+
 		img_hm[:, :, i] = channel_hm
 	
 	img_hm = np.reshape(img_hm, newshape=(img_hm.shape[0]*img_hm.shape[1]*nKeypoints, 1))
+
 	return img, img_hm
 
-# Convert an image to a heatmap through py_function
 def to_hm(image, lm):
 	image, lm = tf.py_function(_convertToHM, (image,lm), (tf.float32, tf.float32))
 	image.set_shape(image_size)
 	lm.set_shape((256*256*N, 1))
 	return image, lm  
 
-
+#==============================================================================
 if __name__ == "__main__":
+	
+	"""
+	1 = training repository (in the form  of'repository/images/' and 'repository/landmark/')
+	2 = number of epochs to train the model
+	3 = batch_size
+	4 = sigma (heatmap spread)
+	"""
 
 	# Params
 	species = 'all_lm_slm'
-	side = 'v'
+	side = 'd'
 	color = 'rgb'
 	fct = 'gaussian'
 	from_save = False
@@ -143,6 +146,7 @@ if __name__ == "__main__":
 	n_epochs = int(sys.argv[1])
 	batch_size = int(sys.argv[2])
 	sigma = int(sys.argv[3])
+	#model_name = int(sys.argv[5])  #UNET or FCN8
 	
 	image_size = (256,256,3) if color == 'rgb' else (256,256,1) # input image size to the model
 	channels = [3,1]  #for decoding images in tf 3:RGB, 1:gray
@@ -195,7 +199,14 @@ if __name__ == "__main__":
 #================= model building and training ================================    
 	model_name = 'unet' # or FCN8
 	filepath="./lm_scripts/saved_models/unet/"+model_name+str(1)+'_'+filename+'_sigma'+str(sigma)+'_'+fct+".hdf5"
+	log_dir="./lm_scripts/logs/fit/"+datetime.now().strftime("%Y%m%d-%H%M%S")
+	# early_stopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=100, mode='min')
 	checkpoint = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+	# reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
+	# 							  patience=50, mode='min', min_lr=0.00001)
+	# tensor_board = TensorBoard(log_dir=log_dir, histogram_freq=1, write_graph=True,
+	# 												  write_images=False)
+	# callbacks = [checkpoint, tensor_board, early_stopping, reduce_lr]
 	callbacks = [checkpoint]
 	
 

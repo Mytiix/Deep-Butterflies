@@ -21,7 +21,7 @@ from sklearn.metrics import mean_squared_error
 from tensorflow.keras.models import Model, load_model
 
 # Params
-species = 'all'
+species = 'granadensis'
 side = 'v'
 color = 'rgb'
 sigma = '4'
@@ -48,6 +48,7 @@ image_size = (256,256,3) if color == 'rgb' else (256,256,1)
 channels = [3,1]
 N = 14 if side == 'v' else 18
 # N = 15 if side == 'v' else 26
+# N = 29 if side == 'v' else 44
 batch_size = 4
 
 #================ Mapping functions ===========================================
@@ -98,7 +99,7 @@ def up_lm(lmks,curr_size, upsize):
 	return np.vstack((up_x_lm, up_y_lm)).T
 
 # Compute predictions
-test_ds = tf.data.Dataset.from_tensor_slices((test_images, test_lmks))
+test_ds = tf.data.Dataset.from_tensor_slices((test_images, None))
 test_ds = test_ds.map(parse_data, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 test_ds = test_ds.map(normalize, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 test_ds = test_ds.batch(batch_size)
