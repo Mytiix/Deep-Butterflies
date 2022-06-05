@@ -18,13 +18,15 @@
 
 
 __author__ = "Vandaele Rémy <remy.vandaele@ulg.ac.be>"
-__contributors__ = ["Marée Raphaël <raphael.maree@ulg.ac.be>"]
+__contributors__ = ["Marée Raphaël <raphael.maree@ulg.ac.be>", "Marganne Louis <louis.marganne@student.uliege.be>"]
 __copyright__ = "Copyright 2010-2016 University of Liège, Belgium, http://www.cytomine.be/"
 
 from sklearn.metrics import mean_squared_error
 from collections import defaultdict
 from argparse import ArgumentParser
 from tqdm import tqdm
+
+from ldmtools import *
 
 import pickle
 import joblib
@@ -36,8 +38,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2 as cv
 
-sys.path.insert(0, '../')
-from ldmtools import *
 
 """
 Given the classifier clf, this function will try to find the landmark on the

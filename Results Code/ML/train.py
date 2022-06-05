@@ -18,10 +18,11 @@
 
 
 __author__ = "Vandaele Rémy <remy.vandaele@ulg.ac.be>"
-__contributors__ = ["Marée Raphaël <raphael.maree@ulg.ac.be>"]
+__contributors__ = ["Marée Raphaël <raphael.maree@ulg.ac.be>", "Marganne Louis <louis.marganne@student.uliege.be>"]
 __copyright__ = "Copyright 2010-2016 University of Liège, Belgium, http://www.cytomine.be/"
 
 from download import *
+from ldmtools import *
 
 from sklearn.ensemble import ExtraTreesClassifier
 from argparse import ArgumentParser
@@ -34,9 +35,6 @@ import joblib
 import pickle
 import glob
 import sys
-
-sys.path.insert(0, '../')
-from ldmtools import *
 
 
 def main():
