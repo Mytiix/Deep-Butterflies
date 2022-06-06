@@ -32,18 +32,15 @@ import numpy as np
 
 import random
 import joblib
-import pickle
-import glob
 import sys
 
 
 def main():
 	## Parameters
-
 	# Arguments
 	parser = ArgumentParser()
 	parser.add_argument('--side', dest='side', required=True, help="v or d (ventral or dorsal)")
-	parser.add_argument('--species', dest='species', required=True, help="The name(s) of the specie(s)")
+	parser.add_argument('--species', dest='species', required=True, help="The name of the folder containing the data")
 	parser.add_argument('--model_njobs', dest='model_njobs', required=True, type=int)
 	parser.add_argument('--model_RMAX', dest='model_RMAX', required=True, type=int)
 	parser.add_argument('--model_R', dest='model_R', required=True, type=int)
@@ -76,7 +73,6 @@ def main():
 
 	
 	## Train models
-
 	# Initialization
 	DATA = None
 	REP = None
@@ -142,7 +138,8 @@ def main():
 		clf = ExtraTreesClassifier(n_jobs=params.model_njobs, n_estimators=params.model_ntrees)
 		clf = clf.fit(DATA, REP)
 
-		# Save model and extra info for prediction
+
+		## Save model and extra info for prediction
 		parameters_hash = {}
 		parameters_hash['model_R'] = params.model_R
 		parameters_hash['model_RMAX'] = params.model_RMAX

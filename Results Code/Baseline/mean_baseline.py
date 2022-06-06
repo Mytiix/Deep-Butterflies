@@ -19,33 +19,23 @@
 __author__ = "Marganne Louis <louis.marganne@student.uliege.be>"
 
 
-import logging
-import random
-import pickle
-import glob
-import sys
-import os
+from sklearn.metrics import mean_squared_error
+from collections import defaultdict
+from argparse import ArgumentParser
 
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2 as cv
 
-from cytomine.models import AnnotationCollection, TermCollection
-from cytomine import Cytomine
+import pickle
+import glob
+import sys
+import os
 
-from sklearn.metrics import mean_squared_error
-from shapely.geometry import Point
-
-from collections import defaultdict
-from argparse import ArgumentParser
-from tabulate import tabulate
-from shapely import wkt
-
-logging.basicConfig()
-logger = logging.getLogger("cytomine.client")
-logger.setLevel(logging.INFO)
 
 if __name__ == '__main__':
+	## Parameters
+	# Arguments
 	parser = ArgumentParser()
 	parser.add_argument('--side', dest='side', required=True, help="v or d (ventral or dorsal)")
 	parser.add_argument('--species', dest='species', required=True, help="The name(s) of the specie(s) (separated by ',')")
@@ -61,14 +51,15 @@ if __name__ == '__main__':
 	org_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/landmarks_v2/*.txt')
 
 	
-	# Compute mean coords of training samples
+	## Compute mean coords of training samples
 	mean_coords = defaultdict(lambda: [0, 0])
 	for file in train_lmks:
 		for i, gt_lm in enumerate(np.loadtxt(file)):
 			mean_coords[i][0] += gt_lm[0] / len(train_lmks)
 			mean_coords[i][1] += gt_lm[1] / len(train_lmks)
 
-	# Fetch ground truth annotations
+
+	## Fetch ground truth annotations
 	org_landmarks = []
 	pred_landmarks = []
 	for file in org_lmks:
@@ -82,7 +73,9 @@ if __name__ == '__main__':
 		org_landmarks.append(np.array(org_lm))
 		pred_landmarks.append(np.array(pred_lm))
 
-	# Evaluation
+	
+	## Evaluation
+	# Compute RMSE/Hit Rate
 	threshold = 30
 	rmse = np.zeros(len(mean_coords))
 	ht = np.zeros(len(mean_coords))
@@ -117,8 +110,11 @@ if __name__ == '__main__':
 	if savefig:
 		org_images = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/images/*.tif')
 
+		if not os.path.exists('images/'):
+			os.makedirs('images/')
+
 		if not os.path.exists('images/'+filename):
-				os.makedirs('images/'+filename)
+			os.makedirs('images/'+filename)
 
 		for i in range(len(org_images)):
 			img = cv.imread(org_images[i])
@@ -137,6 +133,9 @@ if __name__ == '__main__':
 
 
 	if extra:
+		if not os.path.exists('figures/'):
+			os.makedirs('figures/')
+
 		# Hit Rate graph mean_ht
 		mean_ht = np.zeros(100)
 		for i in range(100):

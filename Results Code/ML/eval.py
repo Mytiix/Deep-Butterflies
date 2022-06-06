@@ -39,12 +39,8 @@ import numpy as np
 import cv2 as cv
 
 
-"""
-Given the classifier clf, this function will try to find the landmark on the
-image current
-"""
 
-
+# Given the classifier clf, this function will try to find the landmark on the current image
 def searchpoint_cytomine(repository, current, clf, mx, my, cm, depths, window_size, feature_type, feature_parameters,
 						 image_type,
 						 npred):
@@ -66,8 +62,7 @@ def searchpoint_cytomine(repository, current, clf, mx, my, cm, depths, window_si
 	maxx = []
 	maxy = []
 
-	# maximum number of points considered at once in order to not overload the
-	# memory.
+	# maximum number of points considered at once in order to not overload the memory
 	step = 100000
 
 	for index in range(len(x_v)):
@@ -109,7 +104,6 @@ def searchpoint_cytomine(repository, current, clf, mx, my, cm, depths, window_si
 
 def main():
 	## Parameters
-
 	# Arguments
 	parser = ArgumentParser()
 	parser.add_argument('--side', dest='side', required=True, help="v or d (ventral or dorsal)")
@@ -126,20 +120,14 @@ def main():
 	lm_repo = repository+'landmarks_v2/'
 	im_repo = repository+'images/'
 
-	# if not os.path.exists(repository+'out/'):
-	# 	os.makedirs(repository+'out/')
-	# out_repo = repository+'out/'
-
 	tr_repo = 'D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/training/'
 	tr_out_repo = tr_repo+'out/'
-
 
 	# Get lists of image/term ids to predict
 	list_imgs, term_list = getallcoords(lm_repo)
 
 
 	## Prediction
-
 	# Store annotations as such: {term_id : {image_id : [pred, ground_truth], ...}, ...}
 	annot = defaultdict(lambda: dict())
 	
@@ -160,13 +148,11 @@ def main():
 				fparameters_filepath = tr_out_repo+str(id_term)+'_fparameters.joblib'
 				feature_parameters = joblib.load(fparameters_filepath)
 
-			# Get prediction for each images
+			# Get prediction for each image
 			for id_img in list_imgs:
 				(x, y) = searchpoint_cytomine(im_repo, id_img, model, mx, my, cm, 1. / (2. ** np.arange(parameters_hash['model_depth'])), parameters_hash['window_size'], parameters_hash['feature_type'], feature_parameters, 'tif', parameters_hash['model_npred'])
 				annot[id_term][id_img] = [np.array([x, y])]
 				save.append([id_term, id_img, x, y])
-
-
 
 		# Save predictions
 		file = open('pickle/'+params.species+'_'+params.side+'.pkl', 'wb')
@@ -178,7 +164,8 @@ def main():
 		for v in save:
 			annot[v[0]][v[1]] = [np.array([v[2], v[3]])]
 	
-	# Get ground truth annotations
+
+	## Get ground truth annotations
 	files = glob.glob(lm_repo+'*.txt')
 	org_landmarks = []
 	pred_landmarks = []
@@ -192,7 +179,9 @@ def main():
 		org_landmarks.append(np.array(org_lm))
 		pred_landmarks.append(np.array(pred_lm))
 
-	# Evaluation
+
+	## Evaluation
+	# Compute RMSE/Hit Rate
 	threshold = 30
 	rmse = np.zeros(len(annot))
 	ht = np.zeros(len(annot))
@@ -227,8 +216,11 @@ def main():
 	if savefig:
 		org_images = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/images/*.tif')
 
+		if not os.path.exists('images/'):
+			os.makedirs('images/')
+
 		if not os.path.exists('images/'+filename):
-				os.makedirs('images/'+filename)
+			os.makedirs('images/'+filename)
 
 		for i in range(len(org_images)):
 			img = cv.imread(org_images[i])
@@ -247,6 +239,9 @@ def main():
 
 
 	if extra:
+		if not os.path.exists('figures/'):
+			os.makedirs('figures/')
+			
 		# Hit Rate graph mean_ht
 		mean_ht = np.zeros(100)
 		for i in range(100):

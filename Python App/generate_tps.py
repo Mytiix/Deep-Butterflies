@@ -26,61 +26,15 @@ from cytomine import Cytomine
 from tensorflow.keras.models import load_model
 from argparse import ArgumentParser
 
-import tensorflow as tf
-import numpy as np
-import cv2 as cv
+from utils import *
 
 import pickle
 import glob
 import sys
-import os
 
 
-def parse_data(image, lm):
-	"""
-	Reads image and landmark files depending on
-	specified extension.
-	"""
-	image_content = tf.io.read_file(image)
-
-	image = tf.io.decode_png(image_content, channels=3)
-	image = tf.image.resize(image, (256,256))
-	
-	#image = tf.image.resize_with_pad(image, 256,256)
-	
-	return  image, lm
-
-def normalize(image, lm):
-	image = tf.cast(image, tf.float32)/255.0
-	return image, lm
-
-def maskToKeypoints(mask):
-	# mask = np.reshape(mask, newshape=(96,96))
-	kp = np.unravel_index(np.argmax(mask, axis=None), shape=(256,256))
-	return kp[1], kp[0]
-
-def up_lm(lmks,curr_size, upsize):
-	asp_ratio = upsize[0]/upsize[1] #h/w
-	
-	w = curr_size
-	h = w * asp_ratio
-	
-	up_w = upsize[1]
-	up_h = upsize[0]
-	
-	offset = w - h
-	x_lm = lmks[:,0]
-	y_lm = lmks[:,1]
-	
-	y_lm = y_lm - offset//2  #height is reduced
-	
-	up_y_lm = y_lm * up_h / h
-	up_x_lm = x_lm * up_w / w
-	
-	return np.vstack((up_x_lm, up_y_lm)).T
-
-def pred_lm(model, test_images, test_lmks, org_images, org_lmks, N, batch_size):
-	test_ds = tf.data.Dataset.from_tensor_slices((test_images, test_lmks))
+def pred_lm(model, test_images, org_images, org_lmks, N, batch_size):
+	test_ds = tf.data.Dataset.from_tensor_slices((test_images, None))
 	test_ds = test_ds.map(parse_data, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 	test_ds = test_ds.map(normalize, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 	test_ds = test_ds.batch(batch_size)
@@ -107,8 +61,10 @@ def pred_lm(model, test_images, test_lmks, org_images, org_lmks, N, batch_size):
 
 	return pred_landmarks, lm_ids, up_sizes
 
+
 if __name__ == '__main__':
-	## Arguments
+	## Parameters
+	# Arguments
 	parser = ArgumentParser()
 	parser.add_argument('--host', dest='host', required=True, help="The Cytomine host")
 	parser.add_argument('--public_key', dest='public_key', required=True, help="The Cytomine public key")
@@ -116,20 +72,27 @@ if __name__ == '__main__':
 	parser.add_argument('--project_id', dest='project_id', required=True, help="The project from which we want the images")
 	parser.add_argument('--side', dest='side', required=True, help="v or d (ventral or dorsal)")
 	parser.add_argument('--species', dest='species', required=True, help="The name(s) of the specie(s)")
+	# parser.add_argument('--lm_type', dest='lm_type', required=True, help="Type of landmarks (lm_slm, all)")
+	parser.add_argument('--prob_fct', dest='prob_fct', required=True, help="The probability function used to describe the heatmap dispersion (exp, gaussian)")
+	parser.add_argument('--batch_size', dest='batch_size', required=True, type=int, help="Size of batchs")
+	parser.add_argument('--sigma', dest='sigma', required=True, type=int, help="Value of sigma (in probability function)")
 	params, _ = parser.parse_known_args(sys.argv[1:])
 
-	## Model selection
-	color = 'rgb'
-	sigma = '4'
-	fct = 'gaussian'
+	# Extra params
+	# if params.lm_type == 'lm_slm':
+	N = 14 if params.side == 'v' else 18
+	N_slm = 15 if params.side == 'v' else 26
+	# else:
+	# 	N = 29 if params.side == 'v' else 44
+	# 	N_slm = N
+
 
 	## True landmark model
 	# Load model
-	model = load_model('./lm_scripts/saved_models/unet/unet1_'+params.species+'_'+params.side+'_'+color+'_sigma'+sigma+'_'+fct+'.hdf5')
+	model = load_model('./models/unet1_'+params.species+'_'+params.side+'_sigma'+str(params.sigma)+'_'+params.prob_fct+'.hdf5')
 
 	# Path to rescaled test set
 	test_images = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/rescaled/images/*.png')
-	test_lmks = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/rescaled/landmarks_v2/*.txt')
 
 	# Path to original test set
 	org_images = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/images/*.tif')
@@ -137,43 +100,41 @@ if __name__ == '__main__':
 
 	## Semi-landmark model
 	# Load model
-	model_slm = load_model('./lm_scripts/saved_models/unet/unet1_'+params.species+'_slm_v2_'+params.side+'_'+color+'_sigma'+sigma+'_'+fct+'.hdf5')
-
-	# Path to rescaled test set
-	test_lmks_slm = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'_slm_v2/'+params.side+'/testing/rescaled/landmarks_v2/*.txt')
+	model_slm = load_model('./models/unet1_'+params.species+'_slm_v2_'+params.side+'_sigma'+str(params.sigma)+'_'+params.prob_fct+'.hdf5')
 
 	# Path to original test set
 	org_lmks_slm = glob.glob('D:/Dataset_TFE/images_v2/'+params.species+'_slm_v2/'+params.side+'/testing/landmarks_v2/*.txt')
 	
-	
-	## Hyperparameters
-	N = 14 if params.side == 'v' else 18
-	N_slm = 15 if params.side == 'v' else 26
-	batch_size = 4
-
 
 	## Compute predictions
 	# True landmark
-	pred_landmarks, lm_ids, im_sizes = pred_lm(model, test_images, test_lmks, org_images, org_lmks, N, batch_size)
+	pred_landmarks, lm_ids, im_sizes = pred_lm(model, test_images, org_images, org_lmks, N, params.batch_size)
 
 	# Semi-landmark
-	pred_landmarks_slm, slm_ids, _ = pred_lm(model_slm, test_images, test_lmks_slm, org_images, org_lmks_slm, N_slm, batch_size)
+	pred_landmarks_slm, slm_ids, _ = pred_lm(model_slm, test_images, org_images, org_lmks_slm, N_slm, params.batch_size)
 
 
 	## Write TPS file
+	if not os.path.exists('predictions/'):
+			os.makedirs('predictions/')
+
+	# Open TPS file containing the predictions
 	filename = 'predictions/'+params.species+'_'+params.side+'.TPS'
 	file = open(filename, 'w')
 
+	# Get info about scale value from pickles
 	fname = 'img_scale_d.pkl' if params.side == 'd' else 'img_scale_v.pkl'
 	with open(fname, 'rb') as f:
 		image_scales = pickle.load(f)
 
+	# Construct dictionnaries mapping image/term name to image/name id
 	with Cytomine(host=params.host, public_key=params.public_key, private_key=params.private_key) as cytomine:
 		image_instances = ImageInstanceCollection().fetch_with_filter("project", params.project_id)
 		terms = TermCollection().fetch_with_filter("project", params.project_id)
 		images_names = {image.id : image.filename for image in image_instances}
 		terms_names = {term.id : term.name for term in terms}
 	
+	# Write prediction in TPS file
 	LM = N + N_slm
 	for i, landmarks in enumerate(zip(pred_landmarks, pred_landmarks_slm)):
 		# Get info about current image

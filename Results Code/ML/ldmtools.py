@@ -18,7 +18,7 @@
 
 
 __author__ = "Vandaele Rémy <remy.vandaele@ulg.ac.be>"
-__contributors__ = ["Marée Raphaël <raphael.maree@ulg.ac.be>"]
+__contributors__ = ["Marée Raphaël <raphael.maree@ulg.ac.be>", "Marganne Louis <louis.marganne@student.uliege.be>"]
 __copyright__ = "Copyright 2010-2015 University of Liège, Belgium, http://www.cytomine.be/"
 
 import numpy as np

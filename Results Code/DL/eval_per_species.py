@@ -19,72 +19,22 @@
 __author__ = "Marganne Louis <louis.marganne@student.uliege.be>"
 
 
-from cytomine.models.image import ImageInstanceCollection
-from cytomine.models import TermCollection
-from cytomine import Cytomine
-
 from tensorflow.keras.models import load_model
 from sklearn.metrics import mean_squared_error
 from collections import defaultdict
 from argparse import ArgumentParser
 
-import tensorflow as tf
-import numpy as np
-import cv2 as cv
+from utils import *
 
 import pickle
 import glob
 import sys
-import os
 
-
-def parse_data(image, lm):
-	"""
-	Reads image and landmark files depending on
-	specified extension.
-	"""
-	image_content = tf.io.read_file(image)
-
-	image = tf.io.decode_png(image_content, channels=3)
-	image = tf.image.resize(image, (256,256))
-	
-	#image = tf.image.resize_with_pad(image, 256,256)
-	
-	return  image, lm
-
-def normalize(image, lm):
-	image = tf.cast(image, tf.float32)/255.0
-	return image, lm
-
-def maskToKeypoints(mask):
-	# mask = np.reshape(mask, newshape=(96,96))
-	kp = np.unravel_index(np.argmax(mask, axis=None), shape=(256,256))
-	return kp[1], kp[0]
-
-def up_lm(lmks,curr_size, upsize):
-	asp_ratio = upsize[0]/upsize[1] #h/w
-	
-	w = curr_size
-	h = w * asp_ratio
-	
-	up_w = upsize[1]
-	up_h = upsize[0]
-	
-	offset = w - h
-	x_lm = lmks[:,0]
-	y_lm = lmks[:,1]
-	
-	y_lm = y_lm - offset//2  #height is reduced
-	
-	up_y_lm = y_lm * up_h / h
-	up_x_lm = x_lm * up_w / w
-	
-	return np.vstack((up_x_lm, up_y_lm)).T
 
 def pred_lm(model, test_images, test_lmks, org_images, org_lmks, N, batch_size):
 	test_ds = tf.data.Dataset.from_tensor_slices((test_images, test_lmks))
-	test_ds = test_ds.map(parse_data, num_parallel_calls=tf.data.experimental.AUTOTUNE)
-	test_ds = test_ds.map(normalize, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+	test_ds = test_ds.map(lambda image, lm: parse_data(image, lm), num_parallel_calls=tf.data.experimental.AUTOTUNE)
+	test_ds = test_ds.map(lambda image, lm: normalize(image, lm), num_parallel_calls=tf.data.experimental.AUTOTUNE)
 	test_ds = test_ds.batch(batch_size)
 
 	preds = model.predict(test_ds)
@@ -109,33 +59,34 @@ def pred_lm(model, test_images, test_lmks, org_images, org_lmks, N, batch_size):
 		pred_landmarks.append(up_lmks)
 
 	return pred_landmarks, org_landmarks, lm_ids
+	
 
 if __name__ == '__main__':
-	## Arguments
+	## Parameters
+	# Arguments
 	parser = ArgumentParser()
 	parser.add_argument('--side', dest='side', required=True, help="v or d (ventral or dorsal)")
-	parser.add_argument('--species', dest='species', required=True, help="The name(s) of the specie(s)")
+	parser.add_argument('--species', dest='species', required=True, help="The name of the folder containing the data")
+	parser.add_argument('--lm_type', dest='lm_type', required=True, help="Type of landmarks (lm, slm, all)")
+	parser.add_argument('--prob_fct', dest='prob_fct', required=True, help="The probability function used to describe the heatmap dispersion (exp, gaussian)")
+	parser.add_argument('--batch_size', dest='batch_size', required=True, type=int, help="Size of batchs")
+	parser.add_argument('--sigma', dest='sigma', required=True, type=int, help="Value of sigma (in probability function)")
 	params, _ = parser.parse_known_args(sys.argv[1:])
 
-	## Model selection
-	color = 'rgb'
-	sigma = '4'
-	fct = 'gaussian'
+	# Extra params
+	if params.lm_type == 'lm':
+		N = 14 if params.side == 'v' else 18
+	elif params.lm_type == 'slm':
+		N = 15 if params.side == 'v' else 26
+	else:
+		N = 29 if params.side == 'v' else 44
 
-	## True landmark model
 	# Load model
-	model = load_model('./lm_scripts/saved_models/unet/unet1_'+params.species+'_'+params.side+'_'+color+'_sigma'+sigma+'_'+fct+'.hdf5')
+	model = load_model('./lm_scripts/saved_models/unet/unet1_'+params.species+'_'+params.side+'_sigma'+str(params.sigma)+'_'+params.prob_fct+'.hdf5')
 
 	# Path to original test set
 	test_repo = 'D:/Dataset_TFE/images_v2/'+params.species+'/'+params.side+'/testing/'
 	org_images = glob.glob(test_repo+'images/*.tif')
-
-	
-	## Hyperparameters
-	# N = 14 if params.side == 'v' else 18
-	N = 15 if params.side == 'v' else 26
-	batch_size = 4
-
 
 	# Build dictionary which maps image id to their specie
 	with open('sp.pkl', 'rb') as file:
@@ -170,7 +121,7 @@ if __name__ == '__main__':
 		if len(v[0]) == 0:
 			continue
 
-		pred_landmarks, org_landmarks, lm_ids = pred_lm(model, v[0], v[1], v[2], v[3], N, batch_size)
+		pred_landmarks, org_landmarks, lm_ids = pred_lm(model, v[0], v[1], v[2], v[3], N, params.batch_size)
 
 		# Compute RMSE/Hit Rate
 		threshold = 30

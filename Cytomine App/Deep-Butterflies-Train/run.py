@@ -209,7 +209,7 @@ def main(argv):
 		model.compile(loss="mse", optimizer=optim, metrics=[rmse])
 		model.fit(tr_ds, epochs=cj.parameters.model_epochs, callbacks=callbacks,
 					validation_data=val_ds, steps_per_epoch=steps_per_epoch,
-					validation_steps= val_steps,verbose=1)
+					validation_steps= val_steps, verbose=1)
 
 
 		## 7. Save useful info for prediction
