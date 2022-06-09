@@ -6,5 +6,5 @@ Contains the codes used to obtain the results shown in my Master's thesis.
 
 ## Cytomine App
 The codes of both Cytomine applications (train and pred) can be found at:
-	* https://github.com/Mytiix/S_Deep-Butterflies-Train
-	* https://github.com/Mytiix/S_Deep-Butterflies-Pred
+- https://github.com/Mytiix/S_Deep-Butterflies-Train
+- https://github.com/Mytiix/S_Deep-Butterflies-Pred
