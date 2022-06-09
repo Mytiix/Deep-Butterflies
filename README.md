@@ -1,5 +1,5 @@
 # Deep-Butterflies
-Automatic landmark detection on butterflies wings via machine learning/deep learning
+Automatic landmark detection on butterflies wings via machine learning/deep learning.
 
 ## Results Code
 Contains the codes used to obtain the results shown in my Master's thesis.
